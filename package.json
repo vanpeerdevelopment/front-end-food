@@ -16,6 +16,7 @@
     "url": "https://github.com/vanpeerdevelopment/front-end-food/issues"
   },
   "devDependencies": {
+    "babel": "5.8.23",
     "gulp": "3.9.0"
   }
 }
