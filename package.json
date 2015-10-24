@@ -1,22 +1,22 @@
 {
-  "name": "front-end-food",
-  "version": "0.0.0",
-  "description": "Learning project to experiment with front-end development tools and libraries",
-  "homepage": "https://github.com/vanpeerdevelopment/front-end-food#readme",
-  "author": {
-    "name": "Dieter Van Peer",
-    "email": "dieter@vanpeerdevelopment.be",
-    "url": "https://github.com/vanpeerdevelopment"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vanpeerdevelopment/front-end-food.git"
-  },
-  "bugs": {
-    "url": "https://github.com/vanpeerdevelopment/front-end-food/issues"
-  },
-  "devDependencies": {
-    "babel": "5.8.23",
-    "gulp": "3.9.0"
-  }
+    "name": "front-end-food",
+    "version": "0.0.0",
+    "description": "Learning project to experiment with front-end development tools and libraries",
+    "homepage": "https://github.com/vanpeerdevelopment/front-end-food#readme",
+    "author": {
+        "name": "Dieter Van Peer",
+        "email": "dieter@vanpeerdevelopment.be",
+        "url": "https://github.com/vanpeerdevelopment"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vanpeerdevelopment/front-end-food.git"
+    },
+    "bugs": {
+        "url": "https://github.com/vanpeerdevelopment/front-end-food/issues"
+    },
+    "devDependencies": {
+        "babel": "5.8.23",
+        "gulp": "3.9.0"
+    }
 }
