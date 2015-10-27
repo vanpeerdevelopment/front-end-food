@@ -1,6 +1,12 @@
 language: node_js
 node_js: 4.2
 
-before_script:
-    - npm install -g gulp
+addons:
+    apt:
+        packages:
+            - npm
+
+before_install: update npm
+
+before_script: npm install -g gulp
 script: gulp
