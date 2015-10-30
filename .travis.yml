@@ -10,6 +10,8 @@ before_script: npm install -g gulp
 script: gulp
 
 after_success:
+    - git config user.name "travisvanpeerdevelopment"
+    - git config user.email "travis@vanpeerdevelopment.be"
     - git config credential.helper "store --file=.git/credentials"
     - echo "https://${DEPLOY_TOKEN}:@github.com" > .git/credentials
     - gulp deploy
