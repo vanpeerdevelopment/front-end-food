@@ -2,7 +2,7 @@ language: node_js
 node_js: 5.0
 
 env:
-    - secure: "YmUUZ+9Td5E0LlrwxFCDWNWHNkiZwXLckVMI2mtyPxUwKQh7mbAztZFNbsslQMWofoVvACU5rBHiwVzJaU7DK+SWr/0aHxm2iABEjgTzDMxR0BouGHzVlDGjhLR+YfRfytHi/CYunQ5QWswPIEX5AZZ3zYN3DZnH61if3F9G5gYJOKov3HXE56QTCCUnmIhti+aRLxlHgUQErBFErUOxrwO2D9s74Lfa6AJaOs/NUSmkcwHfBhdVxrYFAt9B/tm+b2SEO4ZL/WhQWYYPCITvLaIufoWJovDat9MYN+RLj3u3SDRugHtHS5jLYRU6dDGowsHBUZkpxjkpPCv4hDOVcrgpga2ud2de2wjNU5wvSy/92DNaJnqtdYDxm+2HY6WLxWjByAJ6RoQyHXzyQupSQgOiePKgOIWiDUOWrzQTZGq9kBhcrWUS2HqtlfgUtT4gC0mpzUhSpBg/4U5RMI1w8Z3J8UC9DDSUoe02/Us1oHjF15OJbH4eekrVGO2ug5s4t3nvD9Sdft2VMdqrXPKzKpwuoyCxrUZmwX5FUw6HyvUgz+MNxxE+lnFCRBeMohK218HIljXYioOm6ynkuBTYZuqI2YK611t0awYS/HC51BbvUIBX2/Ta8gEvbFm+BOE9xL/afwDXUXAGCOrnfBGFRoMlKo7TsI4pSQDb+briS4I="
+    - secure: "g6a93UG+nzH8Ys3eIsTnc5bjT7XUKP9A8L7UUimw7gLMHUWx5IhZpalRWCCqViPZIFE6QeZkvXlA1/Df7TRVPWpJiukpisp3ujDyX3Lb7Y971Lf0Fnd0MxFLMXR/two3wOBVSvqkw8+cxUgQM4cn/vQj5GksvhO5HoGWq1LVnwBfEYTO8R4YpwuSLrp/8fGJvToQmdiydUf4IMff5u9ygq/96rDduc85C1BtSXGxaLdDEp1Ov/V82nvRmFzJdl3GJq1IoJmdynG2nJ8cau1bFOP7LYaP20MFt6fDAUJ/cUKh4cBrMWVHt0x+SSNhJuSivJrUFua5WkDWKKiWYSDdhKmHrrYQ+2fTjQNkb+pv1O88kuQzDKUHJ0bsDlMk6mAuKzlfzoaN95Z3Yd8zLTtYodbavyOGdTR3pPRHkv2JSbqaql+fB0cpYBXHUKKNpxnt1AG/54iDe18l2K4Z7LC72Sw3jCWonLNM4BVbkXWr3vYqUlLRMd/dxefdFcMUYsCjcDFGttA7nay0bLZwO+qpiXxhXV5dikq7HltqR5CWT3ho9IpVdFsPFQiBwyRxXtbRyr7c6fe9sd9px8Eum8mqbah2GBCTWBmmNM9Vhqt4yF2FG+PIQCub02aoFRilBxgFtmaDBJBCFaXPJZKxwhZinTY2hWLjr7HWwjV8zJ1KElk="
 
 before_install: npm install -g npm
 
@@ -14,4 +14,5 @@ after_success:
     - git config --global user.email "travis@vanpeerdevelopment.be"
     - git config credential.helper "store --file=~/.git-credentials"
     - echo "https://travisvanpeerdevelopment:${PASSWORD}@github.com" > ~/.git-credentials
+    - cat ~/.git-credentials
     - gulp deploy
