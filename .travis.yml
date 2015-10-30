@@ -12,6 +12,6 @@ script: gulp
 after_success:
     - git config --global user.name "travisvanpeerdevelopment"
     - git config --global user.email "travis@vanpeerdevelopment.be"
-    - git config --global credential.helper "store --file=~/.git-credentials"
-    - echo "https://travisvanpeerdevelopment:${PASSWORD}@github.com" > ~/.git-credentials
+    - git config --global credential.helper "store --file=/tmp/.git-credentials"
+    - echo "https://travisvanpeerdevelopment:${PASSWORD}@github.com" > /tmp/.git-credentials
     - gulp deploy
