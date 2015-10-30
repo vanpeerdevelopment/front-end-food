@@ -3,7 +3,7 @@ import ghPages from 'gulp-gh-pages';
 
 gulp.task('default', () => {
     return gulp
-        .src('./app/**')
+        .src('./app/**/*')
         .pipe(gulp.dest('./dist/'));
 });
 
