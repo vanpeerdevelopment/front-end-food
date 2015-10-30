@@ -16,7 +16,11 @@
         "url": "https://github.com/vanpeerdevelopment/front-end-food/issues"
     },
     "devDependencies": {
-        "babel": "~5.8.23",
-        "gulp": "~3.9.0"
+        "gulp": "~3.9.0",
+        "babel": "~6.0.0",
+        "babel-preset-es2015": "~6.0.0"
+    },
+    "babel": {
+        "presets": ["es2015"]
     }
 }
