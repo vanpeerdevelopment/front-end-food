@@ -12,7 +12,6 @@ script: gulp
 after_success:
     - git config --global user.name "travisvanpeerdevelopment"
     - git config --global user.email "travis@vanpeerdevelopment.be"
-    - cat ${TRAVIS_BUILD_DIR}
     - git config --global credential.helper "store --file=${TRAVIS_BUILD_DIR}/.git-credentials"
     - echo "https://travisvanpeerdevelopment:${DEPLOY_TOKEN}@github.com" > ${TRAVIS_BUILD_DIR}/.git-credentials
     - gulp deploy
