@@ -1,0 +1,14 @@
+{
+    "name": "front-end-food",
+    "description": "Learning project to experiment with front-end development tools and libraries",
+    "homepage": "http://food.vanpeerdevelopment.be",
+    "authors": [{
+        "name": "Dieter Van Peer",
+        "email": "dieter@vanpeerdevelopment.be",
+        "homepage": "https://github.com/vanpeerdevelopment"
+    }],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vanpeerdevelopment/front-end-food.git"
+    }
+}
