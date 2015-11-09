@@ -10,5 +10,8 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/vanpeerdevelopment/front-end-food.git"
+    },
+    "dependencies": {
+        "angular": "~1.4.7"
     }
 }
