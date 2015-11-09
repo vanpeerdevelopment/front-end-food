@@ -19,6 +19,7 @@
         "babel-core": "~6.1.0",
         "babel-preset-es2015": "~6.1.0",
         "gulp": "~3.9.0",
+        "del": "~2.0.2",
         "gulp-gh-pages": "~0.5.4"
     },
     "babel": {
