@@ -16,7 +16,9 @@ gulp.task('build:app', () => {
 
 gulp.task('build:vendor', () => {
     return gulp
-        .src(mainBowerFiles())
+        .src(mainBowerFiles({
+            checkExistence: true
+        }))
         .pipe(gulp.dest('dist/vendor/'));
 })
 
