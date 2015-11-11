@@ -5,7 +5,7 @@ import mainBowerFiles from 'main-bower-files';
 import browserSync from 'browser-sync';
 import ghPages from 'gulp-gh-pages';
 
-let browserSyncServer = browserSync.create('front-end-food	');
+let browserSyncServer = browserSync.create('front-end-food');
 
 /*
  * main tasks
