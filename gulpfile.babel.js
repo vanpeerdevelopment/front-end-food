@@ -42,11 +42,15 @@ gulp.task('build', ['build:app', 'build:vendor'])
 
 gulp.task('build:app', () => {
     return gulp
-        .src('src/app/**/*')
+        .src(['src/app/**/*', 'src/CNAME', 'src/index.html'], {
+            base: 'src'
+        })
         .pipe(gulp.dest('dist/'));
 })
 
-gulp.task('build:vendor', () => {
+gulp.task('build:vendor', ['build:vendor:bower', 'build:vendor:lib'])
+
+gulp.task('build:vendor:bower', () => {
     return gulp
         .src(mainBowerFiles({
             checkExistence: true
@@ -54,14 +58,20 @@ gulp.task('build:vendor', () => {
         .pipe(gulp.dest('dist/vendor/'));
 })
 
+gulp.task('build:vendor:lib', () => {
+    return gulp
+        .src('src/lib/**/*')
+        .pipe(gulp.dest('dist/vendor/'));
+})
+
 gulp.task('watch', ['watch:app', 'watch:vendor'])
 
 gulp.task('watch:app', () => {
-    gulp.watch('src/app/**/*', ['watch:app:build']);
+    gulp.watch(['src/app/**/*', 'src/CNAME', 'src/index.html'], ['watch:app:build']);
 })
 
 gulp.task('watch:vendor', () => {
-    gulp.watch('bower.json', ['watch:vendor:build']);
+    gulp.watch(['bower.json', 'src/lib/**/*'], ['watch:vendor:build']);
 })
 
 gulp.task('watch:app:build', ['build:app'], browserSyncServer.reload)
