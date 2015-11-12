@@ -1,10 +1,10 @@
 angular
-    .module('app')
-    .controller('RouteController', RouteController);
+    .module("app")
+    .controller("RouteController", RouteController);
 
 function RouteController($router) {
     $router.config([{
-        path: '/',
-        component: 'home'
+        path: "/",
+        component: "home"
     }]);
 }

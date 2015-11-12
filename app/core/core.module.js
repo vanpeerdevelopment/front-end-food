@@ -1,8 +1,8 @@
 angular
-    .module('app.core', [
+    .module("app.core", [
 
         /* angular modules */
-        'ngNewRouter'
+        "ngNewRouter"
 
         /* cross-app modules */
 

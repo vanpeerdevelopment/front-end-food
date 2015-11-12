@@ -1,2 +1,2 @@
 angular
-    .module('app.layout', []);
+    .module("app.layout", []);

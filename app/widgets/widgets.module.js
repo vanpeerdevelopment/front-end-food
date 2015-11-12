@@ -1,2 +1,2 @@
 angular
-    .module('app.widgets', []);
+    .module("app.widgets", []);
