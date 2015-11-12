@@ -1,5 +1,5 @@
 angular
-    .module("app", [
+    .module('app', [
 
         /* shared modules */
         "app.core",
