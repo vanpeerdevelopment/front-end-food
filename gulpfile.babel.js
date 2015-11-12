@@ -1,6 +1,7 @@
 import gulp from 'gulp';
 import runSequence from 'run-sequence';
 import del from 'del';
+import eslint from 'gulp-eslint';
 import mainBowerFiles from 'main-bower-files';
 import browserSync from 'browser-sync';
 import ghPages from 'gulp-gh-pages';
@@ -36,9 +37,9 @@ gulp.task('clean', () => {
     return del('dist/');
 })
 
-gulp.task('dev', ['build', 'watch', 'serve'])
+gulp.task('dev', ['build:app', 'build:vendor', 'watch', 'serve'])
 
-gulp.task('build', ['build:app', 'build:vendor'])
+gulp.task('build', ['build:app', 'build:vendor', 'lint'])
 
 gulp.task('build:app', () => {
     return gulp
@@ -62,6 +63,13 @@ gulp.task('build:vendor:lib', () => {
     return gulp
         .src('src/lib/**/*')
         .pipe(gulp.dest('dist/vendor/'));
+})
+
+gulp.task('lint', () => {
+    return gulp.src('src/app/**/*.js')
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
 })
 
 gulp.task('watch', ['watch:app', 'watch:vendor'])

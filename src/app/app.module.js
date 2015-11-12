@@ -1,11 +1,11 @@
 angular
-    .module('app', [
+    .module("app", [
 
         /* shared modules */
-        'app.core',
-        'app.widgets',
+        "app.core",
+        "app.widgets",
 
         /* feature areas */
-        'app.layout',
-        'app.home'
+        "app.layout",
+        "app.home"
     ]);
