@@ -1,15 +1,15 @@
+function configureTemplateMapping($componentLoaderProvider) {
+    function camelCaseToDashCase(name) {
+        return name.replace(/([A-Z])/g, function capitalToDash($1) {
+            return "-" + $1.toLowerCase();
+        });
+    }
+
+    $componentLoaderProvider.setTemplateMapping(function toTemplatePath(name) {
+        return "./app/" + camelCaseToDashCase(name) + "/" + camelCaseToDashCase(name) + ".html";
+    });
+}
+
 angular
     .module("app.core")
     .config(configureTemplateMapping);
-
-function configureTemplateMapping($componentLoaderProvider) {
-    var camelCaseToDashCase = function(name) {
-        return name.replace(/([A-Z])/g, function($1) {
-            return "-" + $1.toLowerCase();
-        });
-    };
-    $componentLoaderProvider.setTemplateMapping(function(name) {
-        var dashCasedName = camelCaseToDashCase(name);
-        return "./app/" + dashCasedName + "/" + dashCasedName + ".html";
-    });
-}
