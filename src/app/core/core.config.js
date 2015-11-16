@@ -2,16 +2,11 @@ angular
     .module("app.core")
     .config(configureTemplateMapping);
 
-function configureTemplateMapping($componentLoaderProvider) {
-    function camelCaseToDashCase(name) {
-        return name.replace(/([A-Z])/g, function capitalToDash($1) {
-            return "-" + $1.toLowerCase();
-        });
-    }
+let configureTemplateMapping = $componentLoaderProvider => {
+    let camelCaseToDashCase = name => name.replace(/([A-Z])/g, $1 => "-" + $1.toLowerCase());
 
-    $componentLoaderProvider.setTemplateMapping(function toTemplatePath(name) {
-        return "./app/" + camelCaseToDashCase(name) + "/" + camelCaseToDashCase(name) + ".html";
-    });
-}
+    $componentLoaderProvider
+        .setTemplateMapping(name => "./app/" + camelCaseToDashCase(name) + "/" + camelCaseToDashCase(name) + ".html");
+};
 
 configureTemplateMapping.$inject = ["$componentLoaderProvider"];

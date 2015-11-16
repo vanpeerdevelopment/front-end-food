@@ -1,6 +1,7 @@
 import gulp from 'gulp';
 import runSequence from 'run-sequence';
 import del from 'del';
+import babel from 'gulp-babel';
 import eslint from 'gulp-eslint';
 import mainBowerFiles from 'main-bower-files';
 import browserSync from 'browser-sync';
@@ -41,11 +42,30 @@ gulp.task('dev', ['build:app', 'build:vendor', 'watch', 'serve'])
 
 gulp.task('build', ['build:app', 'build:vendor', 'lint'])
 
-gulp.task('build:app', () => {
+gulp.task('build:app', ['build:app:js', 'build:app:html', "build:app:cname"])
+
+gulp.task('build:app:js', () => {
     return gulp
-        .src(['src/app/**/*', 'src/CNAME', 'src/index.html'], {
+        .src(['src/app/**/*.js'], {
             base: 'src'
         })
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(gulp.dest('dist/'));
+})
+
+gulp.task('build:app:html', () => {
+    return gulp
+        .src(['src/index.html', 'src/app/**/*.html'], {
+            base: 'src'
+        })
+        .pipe(gulp.dest('dist/'));
+})
+
+gulp.task('build:app:cname', () => {
+    return gulp
+        .src(['src/CNAME'])
         .pipe(gulp.dest('dist/'));
 })
 
