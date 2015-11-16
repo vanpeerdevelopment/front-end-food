@@ -1,3 +1,7 @@
+angular
+    .module("app")
+    .controller("RouteController", RouteController);
+
 function RouteController($router) {
     $router.config([{
         path: "/",
@@ -5,6 +9,4 @@ function RouteController($router) {
     }]);
 }
 
-angular
-    .module("app")
-    .controller("RouteController", RouteController);
+RouteController.$inject = ["$router"];

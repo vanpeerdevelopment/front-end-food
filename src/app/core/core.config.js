@@ -1,3 +1,7 @@
+angular
+    .module("app.core")
+    .config(configureTemplateMapping);
+
 function configureTemplateMapping($componentLoaderProvider) {
     function camelCaseToDashCase(name) {
         return name.replace(/([A-Z])/g, function capitalToDash($1) {
@@ -10,6 +14,4 @@ function configureTemplateMapping($componentLoaderProvider) {
     });
 }
 
-angular
-    .module("app.core")
-    .config(configureTemplateMapping);
+configureTemplateMapping.$inject = ["$componentLoaderProvider"];
