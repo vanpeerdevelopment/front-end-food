@@ -1,2 +1,3 @@
-angular
-    .module("app.home", []);
+"use strict";
+
+angular.module("app.home", []);

@@ -1,17 +1,17 @@
-angular
-    .module("app.core")
-    .config(configureTemplateMapping);
+"use strict";
 
-function configureTemplateMapping($componentLoaderProvider) {
-    function camelCaseToDashCase(name) {
-        return name.replace(/([A-Z])/g, function capitalToDash($1) {
+angular.module("app.core").config(configureTemplateMapping);
+
+var configureTemplateMapping = function configureTemplateMapping($componentLoaderProvider) {
+    var camelCaseToDashCase = function camelCaseToDashCase(name) {
+        return name.replace(/([A-Z])/g, function ($1) {
             return "-" + $1.toLowerCase();
         });
-    }
+    };
 
-    $componentLoaderProvider.setTemplateMapping(function toTemplatePath(name) {
+    $componentLoaderProvider.setTemplateMapping(function (name) {
         return "./app/" + camelCaseToDashCase(name) + "/" + camelCaseToDashCase(name) + ".html";
     });
-}
+};
 
 configureTemplateMapping.$inject = ["$componentLoaderProvider"];

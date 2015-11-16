@@ -1,11 +1,9 @@
-angular
-    .module("app", [
+"use strict";
 
-        /* shared modules */
-        "app.core",
-        "app.widgets",
+angular.module("app", [
 
-        /* feature areas */
-        "app.layout",
-        "app.home"
-    ]);
+/* shared modules */
+"app.core", "app.widgets",
+
+/* feature areas */
+"app.layout", "app.home"]);

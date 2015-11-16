@@ -1,6 +1,6 @@
-angular
-    .module("app")
-    .controller("RouteController", RouteController);
+"use strict";
+
+angular.module("app").controller("RouteController", RouteController);
 
 function RouteController($router) {
     $router.config([{
