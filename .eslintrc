@@ -3,10 +3,11 @@
     "env": {
         "es6": true
     },
+    "parser": "babel-eslint",
     "globals": {
         "angular": false
     },
-    "plugins": [ "angular" ],
+    "plugins": ["angular", "babel"],
     "rules": {
         "comma-dangle": [2, "never"],
         "no-cond-assign": [2, "except-parens"],
@@ -139,7 +140,7 @@
         "linebreak-style": [2, "unix"],
         "lines-around-comment": 0,
         "max-nested-callbacks": [2, 3],
-        "new-cap": 2,
+        "new-cap": 0,
         "new-parens": 2,
         "newline-after-var": [2, "always"],
         "no-array-constructor": 2,
@@ -157,7 +158,7 @@
         "no-trailing-spaces": 2,
         "no-underscore-dangle": 2,
         "no-unneeded-ternary": 2,
-        "object-curly-spacing": [2, "never"],
+        "object-curly-spacing": [0, "never"],
         "one-var": [2, "never"],
         "operator-assignment": 0,
         "operator-linebreak": [2, "before"],
@@ -187,7 +188,7 @@
         "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
 
         "angular/angularelement": 2,
-        "angular/component-limit": [2, 1],
+        "angular/component-limit": [0, 1],
         "angular/controller-as": 2,
         "angular/controller-as-route": 2,
         "angular/controller-as-vm": [2, "vm"],
@@ -234,6 +235,9 @@
         "angular/typecheck-regexp": 0,
         "angular/typecheck-string": 2,
         "angular/watchers-execution": [2, "$digest"],
-        "angular/window-service": 2
+        "angular/window-service": 2,
+
+        "babel/new-cap": 2,
+        "babel/object-curly-spacing": [2, "never"]
     }
 }

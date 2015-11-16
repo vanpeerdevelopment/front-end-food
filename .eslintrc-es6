@@ -1,17 +1,17 @@
 {
     "rules": {
         "arrow-body-style": [2, "as-needed"],
-        "arrow-parens": [2, "as-needed"],
+        "arrow-parens": [0, "as-needed"],
         "arrow-spacing": [2, { "before": true, "after": true }],
         "constructor-super": 2,
-        "generator-star-spacing": [2, "after"],
+        "generator-star-spacing": [0, "after"],
         "no-arrow-condition": 2,
         "no-class-assign": 2,
         "no-const-assign": 2,
         "no-dupe-class-members": 2,
         "no-this-before-super": 2,
         "no-var": 2,
-        "object-shorthand": [2, "always"],
+        "object-shorthand": [0, "always"],
         "prefer-arrow-callback": 2,
         "prefer-const": 2,
         "prefer-reflect": 2,
@@ -21,5 +21,9 @@
 
         "angular/module-getter": 2,
         "angular/module-setter": 2,
+
+        "babel/generator-star-spacing": [2, "after"],
+        "babel/object-shorthand": [2, "always"],
+        "babel/arrow-parens": [2, "as-needed"]
     }
 }
