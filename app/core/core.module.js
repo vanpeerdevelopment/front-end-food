@@ -4,7 +4,7 @@ angular
         /* angular modules */
         "ngNewRouter"
 
-        /* cross-app modules */
-
         /* 3rd-party modules */
+
+        /* cross-app modules */
     ]);
