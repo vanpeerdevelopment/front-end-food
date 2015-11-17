@@ -1,12 +1,15 @@
-angular
-    .module("app")
-    .controller("RouteController", RouteController);
+class RouteController {
 
-function RouteController($router) {
-    $router.config([{
-        path: "/",
-        component: "home"
-    }]);
+    constructor($router) {
+        $router.config([{
+            path: "/",
+            component: "home"
+        }]);
+    }
 }
 
 RouteController.$inject = ["$router"];
+
+angular
+    .module("app")
+    .controller("RouteController", RouteController);
