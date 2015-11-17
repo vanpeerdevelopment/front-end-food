@@ -180,6 +180,25 @@
         "spaced-comment": [2, "always"],
         "wrap-regex": 2,
 
+        "arrow-body-style": [0, "as-needed"],
+        "arrow-parens": [0, "as-needed"],
+        "arrow-spacing": [2, { "before": true, "after": true }],
+        "constructor-super": 2,
+        "generator-star-spacing": [0, "after"],
+        "no-arrow-condition": 2,
+        "no-class-assign": 2,
+        "no-const-assign": 2,
+        "no-dupe-class-members": 2,
+        "no-this-before-super": 2,
+        "no-var": 2,
+        "object-shorthand": [0, "always"],
+        "prefer-arrow-callback": 2,
+        "prefer-const": 2,
+        "prefer-reflect": 2,
+        "prefer-spread": 2,
+        "prefer-template": 2,
+        "require-yield": 2,
+
         "max-depth": [2, 2],
         "max-len": 0,
         "max-params": [2, 3],
@@ -212,7 +231,7 @@
         "angular/module-dependency-order": [2, { "grouped": true, "prefix": "app" }],
         "angular/module-getter": 0,
         "angular/module-name": 0,
-        "angular/module-setter": 0,
+        "angular/module-setter": 2,
         "angular/no-angular-mock": 2,
         "angular/no-controller": 0,
         "angular/no-cookiestore": 2,
@@ -237,7 +256,10 @@
         "angular/watchers-execution": [2, "$digest"],
         "angular/window-service": 2,
 
+        "babel/generator-star-spacing": [2, "after"],
         "babel/new-cap": 2,
-        "babel/object-curly-spacing": [2, "never"]
+        "babel/object-curly-spacing": [2, "never"],
+        "babel/object-shorthand": [2, "always"],
+        "babel/arrow-parens": [2, "as-needed"]
     }
 }

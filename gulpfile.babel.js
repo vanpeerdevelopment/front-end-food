@@ -7,7 +7,7 @@ import mainBowerFiles from "main-bower-files";
 import browserSync from "browser-sync";
 import ghPages from "gulp-gh-pages";
 
-let browserSyncServer = browserSync.create("front-end-food");
+const browserSyncServer = browserSync.create("front-end-food");
 
 /*
  * main tasks
@@ -15,11 +15,11 @@ let browserSyncServer = browserSync.create("front-end-food");
 
 gulp.task("default", ["clean:build"]);
 
-gulp.task("clean:build", (callback) => {
+gulp.task("clean:build", callback => {
     runSequence("clean", "build", callback);
 });
 
-gulp.task("clean:dev", (callback) => {
+gulp.task("clean:dev", callback => {
     runSequence("clean", "dev", callback);
 });
 
