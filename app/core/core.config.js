@@ -1,17 +1,20 @@
 "use strict";
 
-angular.module("app.core").config(configureTemplateMapping);
-
-function configureTemplateMapping($componentLoaderProvider) {
-    var camelCaseToDashCase = function camelCaseToDashCase(name) {
-        return name.replace(/([A-Z])/g, function ($1) {
+var templateMappingConfig = function templateMappingConfig($componentLoaderProvider) {
+    var camelToDash = function camelToDash(name) {
+        var UPPERCASE = /([A-Z])/g;
+        var upperCaseToDashLowerCase = function upperCaseToDashLowerCase($1) {
             return "-" + $1.toLowerCase();
-        });
+        };
+
+        return name.replace(UPPERCASE, upperCaseToDashLowerCase);
     };
 
     $componentLoaderProvider.setTemplateMapping(function (name) {
-        return "./app/" + camelCaseToDashCase(name) + "/" + camelCaseToDashCase(name) + ".html";
+        return "./app/" + camelToDash(name) + "/" + camelToDash(name) + ".html";
     });
-}
+};
 
-configureTemplateMapping.$inject = ["$componentLoaderProvider"];
+templateMappingConfig.$inject = ["$componentLoaderProvider"];
+
+angular.module("app.core").config(templateMappingConfig);
