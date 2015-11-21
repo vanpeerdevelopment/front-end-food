@@ -1,3 +1,6 @@
 "use strict";
 
-angular.module("app.layout", []);
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = angular.module("app.layout", []);

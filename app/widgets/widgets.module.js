@@ -1,3 +1,6 @@
 "use strict";
 
-angular.module("app.widgets", []);
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = angular.module("app.widgets", []);

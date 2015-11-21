@@ -1,5 +1,8 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 var templateMappingConfig = function templateMappingConfig($componentLoaderProvider) {
     var camelToDash = function camelToDash(name) {
         var UPPERCASE = /([A-Z])/g;
@@ -17,4 +20,4 @@ var templateMappingConfig = function templateMappingConfig($componentLoaderProvi
 
 templateMappingConfig.$inject = ["$componentLoaderProvider"];
 
-angular.module("app.core").config(templateMappingConfig);
+exports.default = templateMappingConfig;
