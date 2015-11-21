@@ -1,11 +1,18 @@
+import RouteController from "./app.route.js";
+import CoreModule from "./core/core.module.js";
+import WidgetsModule from "./widgets/widgets.module.js";
+import LayoutModule from "./layout/layout.module.js";
+import HomeModule from "./home/home.module.js";
+
 angular
     .module("app", [
 
         /* shared modules */
-        "app.core",
-        "app.widgets",
+        CoreModule.name,
+        WidgetsModule.name,
 
         /* feature areas */
-        "app.layout",
-        "app.home"
-    ]);
+        LayoutModule.name,
+        HomeModule.name
+    ])
+    .controller("RouteController", RouteController);

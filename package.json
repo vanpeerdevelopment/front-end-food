@@ -16,7 +16,8 @@
         "url": "https://github.com/vanpeerdevelopment/front-end-food/issues"
     },
     "dependencies": {
-        "angular-new-router": "~0.5.3"
+        "angular-new-router": "~0.5.3",
+        "babel-polyfill": "~6.2.0"
     },
     "devDependencies": {
         "babel-core": "~6.2.0",

@@ -10,6 +10,4 @@ class RouteController {
 
 RouteController.$inject = ["$router"];
 
-angular
-    .module("app")
-    .controller("RouteController", RouteController);
+export default RouteController;

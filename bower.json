@@ -2,7 +2,8 @@
     "name": "front-end-food",
     "description": "Learning project to experiment with front-end development tools and libraries",
     "homepage": "http://food.vanpeerdevelopment.be",
-    "authors": [{
+    "authors": [
+    {
         "name": "Dieter Van Peer",
         "email": "dieter@vanpeerdevelopment.be",
         "homepage": "https://github.com/vanpeerdevelopment"
@@ -12,6 +13,15 @@
         "url": "git+https://github.com/vanpeerdevelopment/front-end-food.git"
     },
     "dependencies": {
-        "angular": "~1.4.7"
+        "angular": "~1.4.7",
+        "es6-module-loader": "~0.17.8",
+        "system.js": "~0.19.6"
+    },
+    "overrides": {
+        "es6-module-loader": {
+            "main": [
+                "./dist/es6-module-loader.js"
+            ]
+        }
     }
 }

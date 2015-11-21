@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app" ng-controller="RouteController">
+<html lang="en" ng-controller="RouteController">
 
 <head>
     <meta charset="utf-8" />
@@ -11,19 +11,11 @@
     <!-- vendor -->
     <script type="text/javascript" src="vendor/angular.js"></script>
     <script type="text/javascript" src="vendor/router.es5.js"></script>
-    <!-- app -->
-    <script type="text/javascript" src="app/app.module.js"></script>
-    <script type="text/javascript" src="app/app.route.js"></script>
-    <!-- app.core -->
-    <script type="text/javascript" src="app/core/core.module.js"></script>
-    <script type="text/javascript" src="app/core/core.config.js"></script>
-    <!-- app.widgets -->
-    <script type="text/javascript" src="app/widgets/widgets.module.js"></script>
-    <!-- app.layout -->
-    <script type="text/javascript" src="app/layout/layout.module.js"></script>
-    <!-- app.home -->
-    <script type="text/javascript" src="app/home/home.module.js"></script>
-    <script type="text/javascript" src="app/home/home.controller.js"></script>
+    <script type="text/javascript" src="vendor/babel-polyfill.js"></script>
+    <script type="text/javascript" src="vendor/es6-module-loader.js"></script>
+    <script type="text/javascript" src="vendor/system.js"></script>
+    <!-- load app -->
+    <script type="text/javascript" src="app/app.bootstrap.js"></script>
 </body>
 
 </html>

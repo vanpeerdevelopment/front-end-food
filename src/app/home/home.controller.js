@@ -1,4 +1,4 @@
-class HomeController {
+export default class HomeController {
 
     constructor() {}
 
@@ -6,7 +6,3 @@ class HomeController {
         this.title = "Front End Food";
     }
 }
-
-angular
-    .module("app.home")
-    .controller("HomeController", HomeController);

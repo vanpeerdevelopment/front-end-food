@@ -12,6 +12,4 @@ let templateMappingConfig = $componentLoaderProvider => {
 
 templateMappingConfig.$inject = ["$componentLoaderProvider"];
 
-angular
-    .module("app.core")
-    .config(templateMappingConfig);
+export default templateMappingConfig;
