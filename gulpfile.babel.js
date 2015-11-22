@@ -82,7 +82,7 @@ gulp.task("build:app:cname", () => {
 
 gulp.task("build:vendor", ["build:vendor:js"]);
 
-gulp.task("build:vendor:js", ["build:vendor:js:bower", "build:vendor:js:lib"]);
+gulp.task("build:vendor:js", ["build:vendor:js:bower", "build:vendor:js:npm"]);
 
 gulp.task("build:vendor:js:bower", () => {
     return gulp
@@ -96,13 +96,17 @@ gulp.task("build:vendor:js:bower", () => {
             suffix: ".min"
         }))
         .pipe(extReplace(".min.js", ".src.min.js"))
+
         .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest("dist/vendor/"));
 });
 
-gulp.task("build:vendor:js:lib", () => {
+gulp.task("build:vendor:js:npm", () => {
     return gulp
-        .src("src/lib/**/*.js")
+        .src([
+            "node_modules/angular-new-router/dist/router.es5.js",
+            "node_modules/babel-polyfill/dist/polyfill.js"
+        ])
         .pipe(sourceMaps.init())
         .pipe(uglify())
         .pipe(rename({
@@ -126,7 +130,7 @@ gulp.task("watch:app", () => {
 });
 
 gulp.task("watch:vendor", () => {
-    gulp.watch(["bower.json", "src/lib/**/*"], ["watch:vendor:build"]);
+    gulp.watch(["bower.json", "package.json"], ["watch:vendor:build"]);
 });
 
 gulp.task("watch:app:build", ["build:app"], browserSyncServer.reload);
