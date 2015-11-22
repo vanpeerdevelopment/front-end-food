@@ -19,3 +19,4 @@ exports.default = angular.module("app.core", [
 
 /* cross-app modules */
 ]).config(_coreConfig2.default);
+//# sourceMappingURL=core.module.js.map

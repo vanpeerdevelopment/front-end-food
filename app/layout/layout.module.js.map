@@ -1,0 +1,1 @@
+{"version":3,"sources":["layout.module.js"],"names":[],"mappings":";;;;;kBAAe,OAAO,CACjB,MAAM,CAAC,YAAY,EAAE,EAAE,CAAC","file":"app/layout/layout.module.js","sourcesContent":["export default angular\n    .module(\"app.layout\", []);\n"],"sourceRoot":"/source/"}

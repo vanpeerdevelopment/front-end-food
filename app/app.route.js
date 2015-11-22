@@ -18,3 +18,4 @@ var RouteController = function RouteController($router) {
 RouteController.$inject = ["$router"];
 
 exports.default = RouteController;
+//# sourceMappingURL=app.route.js.map

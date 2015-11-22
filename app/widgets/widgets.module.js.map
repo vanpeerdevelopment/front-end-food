@@ -1,0 +1,1 @@
+{"version":3,"sources":["widgets.module.js"],"names":[],"mappings":";;;;;kBAAe,OAAO,CACjB,MAAM,CAAC,aAAa,EAAE,EAAE,CAAC","file":"app/widgets/widgets.module.js","sourcesContent":["export default angular\n    .module(\"app.widgets\", []);\n"],"sourceRoot":"/source/"}

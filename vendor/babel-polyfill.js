@@ -4413,3 +4413,5 @@ module.exports = _dereq_(17);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}]},{},[1]);
+
+//# sourceMappingURL=babel-polyfill.js.map

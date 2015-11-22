@@ -29,3 +29,4 @@ _coreModule2.default.name, _widgetsModule2.default.name,
 
 /* feature areas */
 _layoutModule2.default.name, _homeModule2.default.name]).controller("RouteController", _appRoute2.default);
+//# sourceMappingURL=app.module.js.map

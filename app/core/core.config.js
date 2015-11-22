@@ -21,3 +21,4 @@ var templateMappingConfig = function templateMappingConfig($componentLoaderProvi
 templateMappingConfig.$inject = ["$componentLoaderProvider"];
 
 exports.default = templateMappingConfig;
+//# sourceMappingURL=core.config.js.map
