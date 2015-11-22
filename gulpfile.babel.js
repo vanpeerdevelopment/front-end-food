@@ -1,5 +1,4 @@
 import gulp from "gulp";
-import plumber from "gulp-plumber";
 import runSequence from "run-sequence";
 import del from "del";
 import sourceMaps from "gulp-sourcemaps";
@@ -31,7 +30,6 @@ gulp.task("clean:dev", callback => {
 gulp.task("deploy", () => {
     return gulp
         .src("dist/**/*")
-        .pipe(plumber())
         .pipe(ghPages());
 });
 
@@ -59,7 +57,6 @@ gulp.task("clean", () => {
 
 gulp.task("lint", () => {
     return gulp.src(["gulpfile.babel.js", "src/app/**/*.js"])
-        .pipe(plumber())
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
@@ -82,7 +79,6 @@ gulp.task("serve", () => {
 gulp.task("build:app:js", () => {
     return gulp
         .src(["src/app/**/*.js"])
-        .pipe(plumber())
         .pipe(sourceMaps.init())
         .pipe(babel({
             moduleIds: true,
@@ -112,7 +108,6 @@ gulp.task("build:app:html", () => {
         .src(["src/index.html", "src/app/**/*.html"], {
             base: "src"
         })
-        .pipe(plumber())
         .pipe(gulp.dest("dist/"));
 });
 
@@ -128,7 +123,6 @@ gulp.task("watch:app:html:build", ["build:app:html"], browserSyncServer.reload);
 gulp.task("build:app:cname", () => {
     return gulp
         .src(["src/CNAME"])
-        .pipe(plumber())
         .pipe(gulp.dest("dist/"));
 });
 
@@ -153,7 +147,6 @@ gulp.task("build:vendor:js:bower", () => {
             checkExistence: true,
             filter: "**/*.js"
         }))
-        .pipe(plumber())
         .pipe(extReplace(".js", ".src.js"))
         .pipe(sourceMaps.init())
         .pipe(uglify())
@@ -179,7 +172,6 @@ gulp.task("build:vendor:js:npm", () => {
             "node_modules/angular-new-router/dist/router.es5.js",
             "node_modules/babel-polyfill/dist/polyfill.js"
         ])
-        .pipe(plumber())
         .pipe(sourceMaps.init())
         .pipe(uglify())
         .pipe(rename({
