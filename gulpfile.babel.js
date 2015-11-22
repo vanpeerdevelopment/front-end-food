@@ -5,6 +5,8 @@ import sourceMaps from "gulp-sourcemaps";
 import babel from "gulp-babel";
 import uglify from "gulp-uglify";
 import concat from "gulp-concat";
+import rename from "gulp-rename";
+import extReplace from "gulp-ext-replace";
 import eslint from "gulp-eslint";
 import mainBowerFiles from "main-bower-files";
 import browserSync from "browser-sync";
@@ -57,6 +59,9 @@ gulp.task("build:app:js", () => {
         }))
         .pipe(concat("app.js"))
         .pipe(uglify())
+        .pipe(rename({
+            suffix: ".min"
+        }))
         .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest("dist/app/"));
 });
@@ -87,6 +92,10 @@ gulp.task("build:vendor:js:bower", () => {
         }))
         .pipe(sourceMaps.init())
         .pipe(uglify())
+        .pipe(rename({
+            suffix: ".min"
+        }))
+        .pipe(extReplace(".min.js", ".src.min.js"))
         .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest("dist/vendor/"));
 });
@@ -96,6 +105,9 @@ gulp.task("build:vendor:js:lib", () => {
         .src("src/lib/**/*.js")
         .pipe(sourceMaps.init())
         .pipe(uglify())
+        .pipe(rename({
+            suffix: ".min"
+        }))
         .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest("dist/vendor/"));
 });

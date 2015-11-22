@@ -20,13 +20,13 @@
     "overrides": {
         "es6-module-loader": {
             "main": [
-                "./dist/es6-module-loader.js"
+                "./dist/es6-module-loader.src.js"
             ]
         },
         "system.js": {
             "main": [
-                "./dist/system.js",
-                "./dist/system-register-only.js"
+                "./dist/system.src.js",
+                "./dist/system-register-only.src.js"
             ]
         }
     }
