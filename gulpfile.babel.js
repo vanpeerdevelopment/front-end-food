@@ -1,6 +1,7 @@
 import gulp from "gulp";
 import runSequence from "run-sequence";
 import del from "del";
+import sourceMaps from "gulp-sourcemaps";
 import babel from "gulp-babel";
 import eslint from "gulp-eslint";
 import mainBowerFiles from "main-bower-files";
@@ -48,9 +49,11 @@ gulp.task("build:app:js", () => {
         .src(["src/app/**/*.js"], {
             base: "src"
         })
+        .pipe(sourceMaps.init())
         .pipe(babel({
             presets: ["es2015"]
         }))
+        .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest("dist/"));
 });
 
@@ -68,19 +71,26 @@ gulp.task("build:app:cname", () => {
         .pipe(gulp.dest("dist/"));
 });
 
-gulp.task("build:vendor", ["build:vendor:bower", "build:vendor:lib"]);
+gulp.task("build:vendor", ["build:vendor:js"]);
 
-gulp.task("build:vendor:bower", () => {
+gulp.task("build:vendor:js", ["build:vendor:js:bower", "build:vendor:js:lib"]);
+
+gulp.task("build:vendor:js:bower", () => {
     return gulp
         .src(mainBowerFiles({
-            checkExistence: true
+            checkExistence: true,
+            filter: "**/*.js"
         }))
+        .pipe(sourceMaps.init())
+        .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest("dist/vendor/"));
 });
 
-gulp.task("build:vendor:lib", () => {
+gulp.task("build:vendor:js:lib", () => {
     return gulp
-        .src("src/lib/**/*")
+        .src("src/lib/**/*.js")
+        .pipe(sourceMaps.init())
+        .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest("dist/vendor/"));
 });
 
