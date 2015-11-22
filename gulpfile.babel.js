@@ -3,6 +3,7 @@ import runSequence from "run-sequence";
 import del from "del";
 import sourceMaps from "gulp-sourcemaps";
 import babel from "gulp-babel";
+import uglify from "gulp-uglify";
 import eslint from "gulp-eslint";
 import mainBowerFiles from "main-bower-files";
 import browserSync from "browser-sync";
@@ -53,6 +54,7 @@ gulp.task("build:app:js", () => {
         .pipe(babel({
             presets: ["es2015"]
         }))
+        .pipe(uglify())
         .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest("dist/"));
 });
@@ -82,6 +84,7 @@ gulp.task("build:vendor:js:bower", () => {
             filter: "**/*.js"
         }))
         .pipe(sourceMaps.init())
+        .pipe(uglify())
         .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest("dist/vendor/"));
 });
@@ -90,6 +93,7 @@ gulp.task("build:vendor:js:lib", () => {
     return gulp
         .src("src/lib/**/*.js")
         .pipe(sourceMaps.init())
+        .pipe(uglify())
         .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest("dist/vendor/"));
 });
