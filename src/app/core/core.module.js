@@ -1,4 +1,4 @@
-import templateMappingConfig from "./core.config.js";
+import templateMappingConfig from "core/core.config";
 
 export default angular
     .module("app.core", [

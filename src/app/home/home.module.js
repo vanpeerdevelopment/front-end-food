@@ -1,4 +1,4 @@
-import HomeController from "./home.controller.js";
+import HomeController from "home/home.controller";
 
 export default angular
     .module("app.home", [])

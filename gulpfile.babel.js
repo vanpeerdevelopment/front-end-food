@@ -4,6 +4,7 @@ import del from "del";
 import sourceMaps from "gulp-sourcemaps";
 import babel from "gulp-babel";
 import uglify from "gulp-uglify";
+import concat from "gulp-concat";
 import eslint from "gulp-eslint";
 import mainBowerFiles from "main-bower-files";
 import browserSync from "browser-sync";
@@ -47,16 +48,17 @@ gulp.task("build:app", ["build:app:js", "build:app:html", "build:app:cname"]);
 
 gulp.task("build:app:js", () => {
     return gulp
-        .src(["src/app/**/*.js"], {
-            base: "src"
-        })
+        .src(["src/app/**/*.js"])
         .pipe(sourceMaps.init())
         .pipe(babel({
-            presets: ["es2015"]
+            moduleIds: true,
+            presets: ["es2015"],
+            plugins: ["transform-es2015-modules-systemjs"]
         }))
+        .pipe(concat("app.js"))
         .pipe(uglify())
         .pipe(sourceMaps.write("./"))
-        .pipe(gulp.dest("dist/"));
+        .pipe(gulp.dest("dist/app/"));
 });
 
 gulp.task("build:app:html", () => {

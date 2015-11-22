@@ -22,6 +22,12 @@
             "main": [
                 "./dist/es6-module-loader.js"
             ]
+        },
+        "system.js": {
+            "main": [
+                "./dist/system.js",
+                "./dist/system-register-only.js"
+            ]
         }
     }
 }
