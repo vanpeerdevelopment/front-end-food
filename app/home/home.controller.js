@@ -1,27 +1,2 @@
-"use strict";
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var HomeController = (function () {
-    function HomeController() {
-        _classCallCheck(this, HomeController);
-    }
-
-    _createClass(HomeController, [{
-        key: "activate",
-        value: function activate() {
-            this.title = "Front End Food";
-        }
-    }]);
-
-    return HomeController;
-})();
-
-exports.default = HomeController;
+"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var _createClass=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}();Object.defineProperty(exports,"__esModule",{value:!0});var HomeController=function(){function e(){_classCallCheck(this,e)}return _createClass(e,[{key:"activate",value:function(){this.title="Front End Food"}}]),e}();exports["default"]=HomeController;
 //# sourceMappingURL=home.controller.js.map

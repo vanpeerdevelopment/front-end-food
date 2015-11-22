@@ -1,24 +1,2 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var templateMappingConfig = function templateMappingConfig($componentLoaderProvider) {
-    var camelToDash = function camelToDash(name) {
-        var UPPERCASE = /([A-Z])/g;
-        var upperCaseToDashLowerCase = function upperCaseToDashLowerCase($1) {
-            return "-" + $1.toLowerCase();
-        };
-
-        return name.replace(UPPERCASE, upperCaseToDashLowerCase);
-    };
-
-    $componentLoaderProvider.setTemplateMapping(function (name) {
-        return "./app/" + camelToDash(name) + "/" + camelToDash(name) + ".html";
-    });
-};
-
-templateMappingConfig.$inject = ["$componentLoaderProvider"];
-
-exports.default = templateMappingConfig;
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var templateMappingConfig=function(e){var t=function(e){var t=/([A-Z])/g,n=function(e){return"-"+e.toLowerCase()};return e.replace(t,n)};e.setTemplateMapping(function(e){return"./app/"+t(e)+"/"+t(e)+".html"})};templateMappingConfig.$inject=["$componentLoaderProvider"],exports["default"]=templateMappingConfig;
 //# sourceMappingURL=core.config.js.map
