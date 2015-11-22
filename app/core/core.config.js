@@ -1,2 +1,0 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var templateMappingConfig=function(e){var t=function(e){var t=/([A-Z])/g,n=function(e){return"-"+e.toLowerCase()};return e.replace(t,n)};e.setTemplateMapping(function(e){return"./app/"+t(e)+"/"+t(e)+".html"})};templateMappingConfig.$inject=["$componentLoaderProvider"],exports["default"]=templateMappingConfig;
-//# sourceMappingURL=core.config.js.map

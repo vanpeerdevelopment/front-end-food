@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-controller="RouteController">
+<html lang="en" ng-app="app" ng-controller="RouteController">
 
 <head>
     <meta charset="utf-8" />
@@ -14,8 +14,12 @@
     <script type="text/javascript" src="vendor/babel-polyfill.js"></script>
     <script type="text/javascript" src="vendor/es6-module-loader.js"></script>
     <script type="text/javascript" src="vendor/system.js"></script>
+    <script type="text/javascript" src="vendor/system-register-only.js"></script>
     <!-- load app -->
-    <script type="text/javascript" src="app/app.bootstrap.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript">
+        System.import("app.module");
+    </script>
 </body>
 
 </html>
