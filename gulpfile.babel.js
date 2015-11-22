@@ -90,13 +90,12 @@ gulp.task("build:vendor:js:bower", () => {
             checkExistence: true,
             filter: "**/*.js"
         }))
+        .pipe(extReplace(".js", ".src.js"))
         .pipe(sourceMaps.init())
         .pipe(uglify())
         .pipe(rename({
             suffix: ".min"
         }))
-        .pipe(extReplace(".min.js", ".src.min.js"))
-
         .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest("dist/vendor/"));
 });
