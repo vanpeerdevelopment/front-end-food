@@ -17,7 +17,6 @@ const browserSyncServer = browserSync.create("front-end-food");
 /*
  * main tasks
  */
-
 gulp.task("default", ["clean:build"]);
 
 gulp.task("clean:build", callback => {
@@ -37,17 +36,46 @@ gulp.task("deploy", () => {
 /*
  * helper tasks
  */
+gulp.task("build", ["build:app", "build:vendor", "lint"]);
+gulp.task("dev", ["build:app", "build:vendor", "watch", "serve"]);
+gulp.task("watch", ["watch:app", "watch:vendor"]);
 
+gulp.task("build:app", ["build:app:js", "build:app:html", "build:app:cname"]);
+gulp.task("watch:app", ["watch:app:js", "watch:app:html", "watch:app:cname"]);
+
+gulp.task("build:vendor", ["build:vendor:js"]);
+gulp.task("watch:vendor", ["watch:vendor:js"]);
+gulp.task("build:vendor:js", ["build:vendor:js:bower", "build:vendor:js:npm"]);
+gulp.task("watch:vendor:js", ["watch:vendor:js:bower", "watch:vendor:js:npm"]);
+
+/*
+ * general
+ */
 gulp.task("clean", () => {
     return del("dist/");
 });
 
-gulp.task("dev", ["build:app", "build:vendor", "watch", "serve"]);
+gulp.task("lint", () => {
+    return gulp.src(["gulpfile.babel.js", "src/app/**/*.js"])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
 
-gulp.task("build", ["build:app", "build:vendor", "lint"]);
+gulp.task("serve", () => {
+    browserSyncServer.init({
+        server: {
+            baseDir: "dist/"
+        }
+    });
+});
 
-gulp.task("build:app", ["build:app:js", "build:app:html", "build:app:cname"]);
-
+/*
+ * app
+ */
+/*
+ * app:js
+ */
 gulp.task("build:app:js", () => {
     return gulp
         .src(["src/app/**/*.js"])
@@ -66,6 +94,15 @@ gulp.task("build:app:js", () => {
         .pipe(gulp.dest("dist/app/"));
 });
 
+gulp.task("watch:app:js", () => {
+    gulp.watch(["src/app/**/*.js"], ["watch:app:js:build"]);
+});
+
+gulp.task("watch:app:js:build", ["build:app:js"], browserSyncServer.reload);
+
+/*
+ * app:html
+ */
 gulp.task("build:app:html", () => {
     return gulp
         .src(["src/index.html", "src/app/**/*.html"], {
@@ -74,16 +111,36 @@ gulp.task("build:app:html", () => {
         .pipe(gulp.dest("dist/"));
 });
 
+gulp.task("watch:app:html", () => {
+    gulp.watch(["src/index.html", "src/app/**/*.html"], ["watch:app:html:build"]);
+});
+
+gulp.task("watch:app:html:build", ["build:app:html"], browserSyncServer.reload);
+
+/*
+ * app:cname
+ */
 gulp.task("build:app:cname", () => {
     return gulp
         .src(["src/CNAME"])
         .pipe(gulp.dest("dist/"));
 });
 
-gulp.task("build:vendor", ["build:vendor:js"]);
+gulp.task("watch:app:cname", () => {
+    gulp.watch(["src/CNAME"], ["watch:app:cname:build"]);
+});
 
-gulp.task("build:vendor:js", ["build:vendor:js:bower", "build:vendor:js:npm"]);
+gulp.task("watch:app:cname:build", ["build:app:cname"], browserSyncServer.reload);
 
+/*
+ * vendor
+ */
+/*
+ * vendor:js
+ */
+/*
+ * vendor:js:bower
+ */
 gulp.task("build:vendor:js:bower", () => {
     return gulp
         .src(mainBowerFiles({
@@ -100,6 +157,15 @@ gulp.task("build:vendor:js:bower", () => {
         .pipe(gulp.dest("dist/vendor/"));
 });
 
+gulp.task("watch:vendor:js:bower", () => {
+    gulp.watch(["bower.json"], ["watch:vendor:js:bower:build"]);
+});
+
+gulp.task("watch:vendor:js:bower:build", ["build:vendor:js:bower"], browserSyncServer.reload);
+
+/*
+ * vendor:js:npm
+ */
 gulp.task("build:vendor:js:npm", () => {
     return gulp
         .src([
@@ -115,31 +181,8 @@ gulp.task("build:vendor:js:npm", () => {
         .pipe(gulp.dest("dist/vendor/"));
 });
 
-gulp.task("lint", () => {
-    return gulp.src(["gulpfile.babel.js", "src/app/**/*.js"])
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failAfterError());
+gulp.task("watch:vendor:js:npm", () => {
+    gulp.watch(["package.json"], ["watch:vendor:js:npm:build"]);
 });
 
-gulp.task("watch", ["watch:app", "watch:vendor"]);
-
-gulp.task("watch:app", () => {
-    gulp.watch(["src/app/**/*", "src/CNAME", "src/index.html"], ["watch:app:build"]);
-});
-
-gulp.task("watch:vendor", () => {
-    gulp.watch(["bower.json", "package.json"], ["watch:vendor:build"]);
-});
-
-gulp.task("watch:app:build", ["build:app"], browserSyncServer.reload);
-
-gulp.task("watch:vendor:build", ["build:vendor"], browserSyncServer.reload);
-
-gulp.task("serve", () => {
-    browserSyncServer.init({
-        server: {
-            baseDir: "dist/"
-        }
-    });
-});
+gulp.task("watch:vendor:js:npm:build", ["build:vendor:js:npm"], browserSyncServer.reload);
