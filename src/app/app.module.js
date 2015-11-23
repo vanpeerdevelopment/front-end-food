@@ -1,3 +1,4 @@
+import disableDebugInfo from "app.config";
 import RouteController from "app.route";
 import CoreModule from "core/core.module";
 import WidgetsModule from "widgets/widgets.module";
@@ -15,4 +16,5 @@ export default angular
         LayoutModule.name,
         HomeModule.name
     ])
+    .config(disableDebugInfo)
     .controller("RouteController", RouteController);
