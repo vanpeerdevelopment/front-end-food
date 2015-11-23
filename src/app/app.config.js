@@ -1,9 +1,9 @@
-export const disableDebugInfo = $compileProvider => {
+export let disableDebugInfo = $compileProvider => {
     "ngInject";
     $compileProvider.debugInfoEnabled(false);
 };
 
-export const enableHtml5Mode = $locationProvider => {
+export let enableHtml5Mode = $locationProvider => {
     "ngInject";
     $locationProvider.html5Mode(true);
 };
