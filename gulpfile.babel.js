@@ -3,8 +3,9 @@ import runSequence from "run-sequence";
 import del from "del";
 import sourceMaps from "gulp-sourcemaps";
 import babel from "gulp-babel";
-import uglify from "gulp-uglify";
+import ngAnnotate from "gulp-ng-annotate";
 import concat from "gulp-concat";
+import uglify from "gulp-uglify";
 import rename from "gulp-rename";
 import extReplace from "gulp-ext-replace";
 import eslint from "gulp-eslint";
@@ -86,6 +87,7 @@ gulp.task("build:app:js", () => {
             plugins: ["transform-es2015-modules-systemjs"]
         }))
         .pipe(concat("app.js"))
+        .pipe(ngAnnotate())
         .pipe(uglify())
         .pipe(rename({
             suffix: ".min"
