@@ -260,6 +260,7 @@
         "babel/new-cap": 2,
         "babel/object-curly-spacing": [2, "never"],
         "babel/object-shorthand": [2, "always"],
-        "babel/arrow-parens": [2, "as-needed"]
+        "babel/arrow-parens": [2, "as-needed"],
+        "babel/no-await-in-loop": 2
     }
 }
