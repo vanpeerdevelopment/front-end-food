@@ -57,7 +57,7 @@ gulp.task("clean", () => {
 });
 
 gulp.task("lint", () => {
-    return gulp.src(["gulpfile.babel.js", "src/app/**/*.js"])
+    return gulp.src(["gulpfile.babel.js", "src/app/**/*.js", "test/unit/**/*.js"])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
