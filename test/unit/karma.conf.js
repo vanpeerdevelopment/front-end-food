@@ -5,11 +5,15 @@ module.exports = function configure(config) {
         basePath: "../..",
         files: ["test/unit/**/*.spec.js"],
         browsers: ["PhantomJS"],
-        frameworks: ["mocha"],
+        frameworks: [
+            "mocha",
+            "chai"
+        ],
         reporters: ["mocha"],
         plugins: [
             "karma-phantomjs-launcher",
             "karma-mocha",
+            "karma-chai",
             "karma-mocha-reporter"
         ],
         port: 9876
