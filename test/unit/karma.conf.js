@@ -5,9 +5,13 @@ module.exports = function configure(config) {
         basePath: "../..",
         files: ["test/unit/**/*.spec.js"],
         browsers: ["Firefox"],
-        plugins: ["karma-firefox-launcher"],
-        frameworks: [],
-        reporters: [],
+        frameworks: ["mocha"],
+        reporters: ["mocha"],
+        plugins: [
+            "karma-firefox-launcher",
+            "karma-mocha",
+            "karma-mocha-reporter"
+        ],
         port: 9876
     });
 };

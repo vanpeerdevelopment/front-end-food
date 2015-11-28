@@ -1,3 +1,5 @@
+/* global __dirname */
+
 import gulp from "gulp";
 import runSequence from "run-sequence";
 import del from "del";
@@ -9,6 +11,7 @@ import uglify from "gulp-uglify";
 import rename from "gulp-rename";
 import extReplace from "gulp-ext-replace";
 import eslint from "gulp-eslint";
+import karma from "karma";
 import mainBowerFiles from "main-bower-files";
 import browserSync from "browser-sync";
 import ghPages from "gulp-gh-pages";
@@ -37,9 +40,9 @@ gulp.task("deploy", () => {
 /*
  * helper tasks
  */
-gulp.task("build", ["build:app", "build:vendor", "lint"]);
+gulp.task("build", ["build:app", "build:vendor", "lint", "test"]);
 gulp.task("dev", ["build:app", "build:vendor", "watch", "serve"]);
-gulp.task("watch", ["watch:app", "watch:vendor"]);
+gulp.task("watch", ["watch:app", "watch:vendor", "watch:test"]);
 
 gulp.task("build:app", ["build:app:js", "build:app:html", "build:app:cname"]);
 gulp.task("watch:app", ["watch:app:js", "watch:app:html", "watch:app:cname"]);
@@ -61,6 +64,23 @@ gulp.task("lint", () => {
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
+});
+
+gulp.task("test", callback => {
+    new karma.Server({
+        configFile: `${__dirname}/test/unit/karma.conf.js`,
+        singleRun: true
+    },
+    callback)
+    .start();
+});
+
+gulp.task("watch:test", callback => {
+    new karma.Server({
+        configFile: `${__dirname}/test/unit/karma.conf.js`
+    },
+    callback)
+    .start();
 });
 
 gulp.task("serve", () => {
