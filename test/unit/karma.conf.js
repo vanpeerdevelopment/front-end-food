@@ -7,13 +7,13 @@ module.exports = function configure(config) {
         browsers: ["PhantomJS"],
         frameworks: [
             "mocha",
-            "chai"
+            "chai-sinon"
         ],
         reporters: ["mocha"],
         plugins: [
             "karma-phantomjs-launcher",
             "karma-mocha",
-            "karma-chai",
+            "karma-chai-sinon",
             "karma-mocha-reporter"
         ],
         port: 9876
