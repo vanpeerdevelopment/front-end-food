@@ -4,11 +4,11 @@ module.exports = function configure(config) {
     config.set({
         basePath: "../..",
         files: ["test/unit/**/*.spec.js"],
-        browsers: ["Firefox"],
+        browsers: ["PhantomJS"],
         frameworks: ["mocha"],
         reporters: ["mocha"],
         plugins: [
-            "karma-firefox-launcher",
+            "karma-phantomjs-launcher",
             "karma-mocha",
             "karma-mocha-reporter"
         ],
