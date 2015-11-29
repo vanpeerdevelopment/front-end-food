@@ -5,7 +5,11 @@ module.exports = function configure(config) {
         basePath: "../..",
         files: [
             "node_modules/babel-polyfill/dist/polyfill.js",
-            "test/unit/**/*.spec.js"
+            "bower_components/es6-module-loader/dist/es6-module-loader.src.js",
+            "bower_components/system.js/dist/system.src.js",
+            // "bower_components/system.js/dist/system-register-only.src.js",
+            "test/unit/**/*.spec.js",
+            "test/unit/karma.start.js"
         ],
         browsers: ["PhantomJS"],
         preprocessors: {
@@ -13,8 +17,16 @@ module.exports = function configure(config) {
         },
         babelPreprocessor: {
             options: {
+                moduleIds: true,
                 presets: ["es2015"],
-                sourceMap: "inline"
+                plugins: ["transform-es2015-modules-systemjs"],
+                sourceMap: "true"
+            },
+            filenameRelative: function filename(file) {
+                return file.originalPath.substring(file.originalPath.indexOf("test/unit/") + "test/unit/".length);
+            },
+            sourceMapTarget: function sourceMapTarget(file) {
+                return file.originalPath;
             },
             sourceFileName: function sourceFileName(file) {
                 return `/sources/${file.originalPath.substring(file.originalPath.indexOf("test/unit/"))}`;
