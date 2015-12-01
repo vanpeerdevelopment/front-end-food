@@ -1,60 +1,47 @@
-/* eslint-disable */
+/* globals __karma__ */
+/* eslint no-underscore-dangle: 0 */
 
-__karma__.loaded = function() {};
-
-System.config({
-    map: moduleNamesToPath()
-});
-
-var importPromises = testModuleNames().map(importModule);
-
-Promise.all(importPromises).then(startKarma);
-
-function moduleNamesToPath(){
-    var result = {};
-    testModuleNameToPathMapping().forEach(function(mapping){
-        result[mapping.name] = mapping.path;
-    });
-    return result;
-}
-
-function testModuleNameToPathMapping(){
-    return Object.keys(window.__karma__.files)
-        .filter(hasFileAsOwnProperty)
-        .filter(isUnitTestSpecJs)
-        .map(toTestModuleNamePathMapping);
-}
-
-function toTestModuleNamePathMapping(file){
-    return {
-        name: file.match(/^\/base\/test\/unit\/(.*).js$/)[1],
-        path: file
+(() => {
+    let disableKarmaAutoStartUp = () => {
+        __karma__.loaded = () => {};
     };
-}
 
-function testModuleNames(){
-    return Object.keys(window.__karma__.files)
-        .filter(hasFileAsOwnProperty)
-        .filter(isUnitTestSpecJs)
-        .map(toTestModuleName);
-}
+    let configureSystemJS = () => {
+        let testModuleNameToPath = {};
 
-function toTestModuleName(file){
-    return file.match(/^\/base\/test\/unit\/(.*).js$/)[1];
-}
+        Object.keys(__karma__.files)
+            .filter(filePath => __karma__.files.hasOwnProperty(filePath))
+            .filter(filePath => (/^\/base\/test\/unit\/(.*).spec.js$/).test(filePath))
+            .map(filePath => {
+                return {
+                    name: filePath.match(/^\/base\/test\/unit\/(.*).js$/)[1],
+                    path: filePath
+                };
+            })
+            .forEach(entry => testModuleNameToPath[entry.name] = entry.path);
 
-function hasFileAsOwnProperty(file){
-    return window.__karma__.files.hasOwnProperty(file);
-}
+        System.config({
+            map: testModuleNameToPath
+        });
+    };
 
-function isUnitTestSpecJs(file){
-    return /^\/base\/test\/unit\/(.*).spec.js$/.test(file);
-}
+    let importTestFiles = () => {
+        return Object.keys(__karma__.files)
+            .filter(filePath => __karma__.files.hasOwnProperty(filePath))
+            .filter(filePath => (/^\/base\/test\/unit\/(.*).spec.js$/).test(filePath))
+            .map(filePath => filePath.match(/^\/base\/test\/unit\/(.*).js$/)[1])
+            .map(testModuleName => System.import(testModuleName));
+    };
 
-function importModule(name){
-    return System.import(name);
-}
+    let startKarma = importTestFilePromises => {
+        Promise
+            .all(importTestFilePromises)
+            .then(
+                () => __karma__.start(),
+                error => __karma__.error(error.stack || error));
+    };
 
-function startKarma(){
-    window.__karma__.start();
-}
+    disableKarmaAutoStartUp();
+    configureSystemJS();
+    startKarma(importTestFiles());
+})();

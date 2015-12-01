@@ -7,29 +7,39 @@ module.exports = function configure(config) {
             "node_modules/babel-polyfill/dist/polyfill.js",
             "bower_components/es6-module-loader/dist/es6-module-loader.src.js",
             "bower_components/system.js/dist/system.src.js",
-            // "bower_components/system.js/dist/system-register-only.src.js",
             "test/unit/**/*.spec.js",
             "test/unit/karma.start.js"
         ],
         browsers: ["PhantomJS"],
         preprocessors: {
-            "test/unit/**/*.spec.js": ["babel"]
+            "test/unit/**/*.spec.js": ["babelES2015SystemJS"],
+            "test/unit/karma.start.js": ["babelES2015"]
         },
-        babelPreprocessor: {
-            options: {
-                moduleIds: true,
-                presets: ["es2015"],
-                plugins: ["transform-es2015-modules-systemjs"],
-                sourceMap: "true"
+        customPreprocessors: {
+            babelES2015: {
+                base: "babel",
+                options: {
+                    presets: ["es2015"],
+                    sourceMap: "inline"
+                },
+                sourceFileName: function sourceFileName(file) {
+                    return `/sources/${file.originalPath.substring(file.originalPath.indexOf("test/unit/"))}`;
+                }
             },
-            filenameRelative: function filename(file) {
-                return file.originalPath.substring(file.originalPath.indexOf("test/unit/") + "test/unit/".length);
-            },
-            sourceMapTarget: function sourceMapTarget(file) {
-                return file.originalPath;
-            },
-            sourceFileName: function sourceFileName(file) {
-                return `/sources/${file.originalPath.substring(file.originalPath.indexOf("test/unit/"))}`;
+            babelES2015SystemJS: {
+                base: "babel",
+                options: {
+                    presets: ["es2015"],
+                    moduleIds: true,
+                    plugins: ["transform-es2015-modules-systemjs"],
+                    sourceMap: "inline"
+                },
+                filenameRelative: function filename(file) {
+                    return file.originalPath.substring(file.originalPath.indexOf("test/unit/") + "test/unit/".length);
+                },
+                sourceFileName: function sourceFileName(file) {
+                    return `/sources/${file.originalPath.substring(file.originalPath.indexOf("test/unit/"))}`;
+                }
             }
         },
         frameworks: [
