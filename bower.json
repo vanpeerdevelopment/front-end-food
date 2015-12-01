@@ -25,8 +25,7 @@
         },
         "system.js": {
             "main": [
-                "./dist/system.src.js",
-                "./dist/system-register-only.src.js"
+                "./dist/system.src.js"
             ]
         }
     }
