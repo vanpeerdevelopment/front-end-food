@@ -6,7 +6,10 @@ describe("HomeController", () => {
     beforeEach(() => homeController = new HomeController());
 
     describe("#activate()", () =>
-        it("should initialize title", () =>
-            homeController.title.should.equal("Front End Food"))
+        it("should initialize title", () => {
+            homeController.activate();
+
+            homeController.title.should.equal("Front End Food");
+        })
     );
 });
