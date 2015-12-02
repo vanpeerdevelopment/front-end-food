@@ -19,6 +19,7 @@ import ghPages from "gulp-gh-pages";
 const browserSyncServer = browserSync.create("front-end-food");
 const DIST = "dist/";
 const DIST_SRC = `${DIST}src/`;
+const DIST_TEST = `${DIST}test/`;
 
 /*
  * main tasks
@@ -59,10 +60,12 @@ let testWatch = test(false);
 gulp.task("build", ["build:app", "build:vendor", "lint"], testSingleRun);
 gulp.task("dev", ["build:app", "build:vendor", "watch:app", "watch:vendor", "serve"], testWatch);
 
-gulp.task("build:app", ["build:app:src"]);
-gulp.task("watch:app", ["watch:app:src"]);
+gulp.task("build:app", ["build:app:src", "build:app:test"]);
+gulp.task("watch:app", ["watch:app:src", "watch:app:test"]);
 gulp.task("build:app:src", ["build:app:src:js", "build:app:src:html", "build:app:src:cname"]);
 gulp.task("watch:app:src", ["watch:app:src:js", "watch:app:src:html", "watch:app:src:cname"]);
+gulp.task("build:app:test", ["build:app:test:js"]);
+gulp.task("watch:app:test", ["watch:app:test:js"]);
 
 gulp.task("build:vendor", ["build:vendor:js"]);
 gulp.task("watch:vendor", ["watch:vendor:js"]);
@@ -156,6 +159,32 @@ gulp.task("watch:app:src:cname", () => {
 });
 
 gulp.task("watch:app:src:cname:build", ["build:app:src:cname"], browserSyncServer.reload);
+
+/*
+ * app
+ */
+/*
+ * test
+ */
+/*
+ * app:test:js
+ */
+gulp.task("build:app:test:js", () => {
+    return gulp
+        .src(["test/unit/**/*.spec.js"])
+        .pipe(sourceMaps.init())
+        .pipe(babel({
+            moduleIds: true,
+            presets: ["es2015"],
+            plugins: ["transform-es2015-modules-systemjs"]
+        }))
+        .pipe(sourceMaps.write("./"))
+        .pipe(gulp.dest(`${DIST_TEST}unit/`));
+});
+
+gulp.task("watch:app:test:js", () => {
+    gulp.watch(["test/unit/**/*.spec.js"], ["build:app:test:js"]);
+});
 
 /*
  * vendor
