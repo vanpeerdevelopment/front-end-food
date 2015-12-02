@@ -9,24 +9,9 @@ module.exports = function configure(config) {
             "bower_components/system.js/dist/system.src.js",
             "dist/src/app/**/*.js",
             "dist/test/unit/**/*.spec.js",
-            "test/unit/karma.start.js"
+            "test/unit/karma.bootstrap.js"
         ],
         browsers: ["PhantomJS"],
-        preprocessors: {
-            "test/unit/karma.start.js": ["babelES2015"]
-        },
-        customPreprocessors: {
-            babelES2015: {
-                base: "babel",
-                options: {
-                    presets: ["es2015"],
-                    sourceMap: "inline"
-                },
-                sourceFileName: function sourceFileName(file) {
-                    return `/sources/${file.originalPath.substring(file.originalPath.indexOf("test/unit/"))}`;
-                }
-            }
-        },
         frameworks: [
             "mocha",
             "chai-sinon"
