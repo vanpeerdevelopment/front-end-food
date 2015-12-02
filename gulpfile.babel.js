@@ -46,8 +46,10 @@ gulp.task("build", ["build:app", "build:vendor", "lint", "test"]);
 gulp.task("dev", ["build:app", "build:vendor", "watch", "serve"]);
 gulp.task("watch", ["watch:app", "watch:vendor", "watch:test"]);
 
-gulp.task("build:app", ["build:app:js", "build:app:html", "build:app:cname"]);
-gulp.task("watch:app", ["watch:app:js", "watch:app:html", "watch:app:cname"]);
+gulp.task("build:app", ["build:app:src"]);
+gulp.task("watch:app", ["watch:app:src"]);
+gulp.task("build:app:src", ["build:app:src:js", "build:app:src:html", "build:app:src:cname"]);
+gulp.task("watch:app:src", ["watch:app:src:js", "watch:app:src:html", "watch:app:src:cname"]);
 
 gulp.task("build:vendor", ["build:vendor:js"]);
 gulp.task("watch:vendor", ["watch:vendor:js"]);
@@ -97,9 +99,12 @@ gulp.task("serve", () => {
  * app
  */
 /*
- * app:js
+ * src
  */
-gulp.task("build:app:js", () => {
+/*
+ * app:src:js
+ */
+gulp.task("build:app:src:js", () => {
     return gulp
         .src(["src/app/**/*.js"])
         .pipe(sourceMaps.init())
@@ -118,16 +123,16 @@ gulp.task("build:app:js", () => {
         .pipe(gulp.dest(`${DIST_SRC}app/`));
 });
 
-gulp.task("watch:app:js", () => {
-    gulp.watch(["src/app/**/*.js"], ["watch:app:js:build"]);
+gulp.task("watch:app:src:js", () => {
+    gulp.watch(["src/app/**/*.js"], ["watch:app:src:js:build"]);
 });
 
-gulp.task("watch:app:js:build", ["build:app:js"], browserSyncServer.reload);
+gulp.task("watch:app:src:js:build", ["build:app:src:js"], browserSyncServer.reload);
 
 /*
- * app:html
+ * app:src:html
  */
-gulp.task("build:app:html", () => {
+gulp.task("build:app:src:html", () => {
     return gulp
         .src(["src/index.html", "src/app/**/*.html"], {
             base: "src"
@@ -135,26 +140,26 @@ gulp.task("build:app:html", () => {
         .pipe(gulp.dest(DIST_SRC));
 });
 
-gulp.task("watch:app:html", () => {
-    gulp.watch(["src/index.html", "src/app/**/*.html"], ["watch:app:html:build"]);
+gulp.task("watch:app:src:html", () => {
+    gulp.watch(["src/index.html", "src/app/**/*.html"], ["watch:app:src:html:build"]);
 });
 
-gulp.task("watch:app:html:build", ["build:app:html"], browserSyncServer.reload);
+gulp.task("watch:app:src:html:build", ["build:app:src:html"], browserSyncServer.reload);
 
 /*
- * app:cname
+ * app:src:cname
  */
-gulp.task("build:app:cname", () => {
+gulp.task("build:app:src:cname", () => {
     return gulp
         .src(["src/CNAME"])
         .pipe(gulp.dest(DIST_SRC));
 });
 
-gulp.task("watch:app:cname", () => {
-    gulp.watch(["src/CNAME"], ["watch:app:cname:build"]);
+gulp.task("watch:app:src:cname", () => {
+    gulp.watch(["src/CNAME"], ["watch:app:src:cname:build"]);
 });
 
-gulp.task("watch:app:cname:build", ["build:app:cname"], browserSyncServer.reload);
+gulp.task("watch:app:src:cname:build", ["build:app:src:cname"], browserSyncServer.reload);
 
 /*
  * vendor
