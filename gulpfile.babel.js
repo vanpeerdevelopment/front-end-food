@@ -17,6 +17,8 @@ import browserSync from "browser-sync";
 import ghPages from "gulp-gh-pages";
 
 const browserSyncServer = browserSync.create("front-end-food");
+const DIST = "dist/";
+const DIST_SRC = `${DIST}src/`;
 
 /*
  * main tasks
@@ -33,7 +35,7 @@ gulp.task("clean:dev", callback => {
 
 gulp.task("deploy", () => {
     return gulp
-        .src("dist/**/*")
+        .src(`${DIST_SRC}**/*`)
         .pipe(ghPages());
 });
 
@@ -56,7 +58,7 @@ gulp.task("watch:vendor:js", ["watch:vendor:js:bower", "watch:vendor:js:npm"]);
  * general
  */
 gulp.task("clean", () => {
-    return del("dist/");
+    return del(DIST);
 });
 
 gulp.task("lint", () => {
@@ -86,7 +88,7 @@ gulp.task("watch:test", callback => {
 gulp.task("serve", () => {
     browserSyncServer.init({
         server: {
-            baseDir: "dist/"
+            baseDir: DIST_SRC
         }
     });
 });
@@ -113,7 +115,7 @@ gulp.task("build:app:js", () => {
             suffix: ".min"
         }))
         .pipe(sourceMaps.write("./"))
-        .pipe(gulp.dest("dist/app/"));
+        .pipe(gulp.dest(`${DIST_SRC}app/`));
 });
 
 gulp.task("watch:app:js", () => {
@@ -130,7 +132,7 @@ gulp.task("build:app:html", () => {
         .src(["src/index.html", "src/app/**/*.html"], {
             base: "src"
         })
-        .pipe(gulp.dest("dist/"));
+        .pipe(gulp.dest(DIST_SRC));
 });
 
 gulp.task("watch:app:html", () => {
@@ -145,7 +147,7 @@ gulp.task("watch:app:html:build", ["build:app:html"], browserSyncServer.reload);
 gulp.task("build:app:cname", () => {
     return gulp
         .src(["src/CNAME"])
-        .pipe(gulp.dest("dist/"));
+        .pipe(gulp.dest(DIST_SRC));
 });
 
 gulp.task("watch:app:cname", () => {
@@ -176,7 +178,7 @@ gulp.task("build:vendor:js:bower", () => {
             suffix: ".min"
         }))
         .pipe(sourceMaps.write("./"))
-        .pipe(gulp.dest("dist/vendor/"));
+        .pipe(gulp.dest(`${DIST_SRC}vendor/`));
 });
 
 gulp.task("watch:vendor:js:bower", () => {
@@ -200,7 +202,7 @@ gulp.task("build:vendor:js:npm", () => {
             suffix: ".min"
         }))
         .pipe(sourceMaps.write("./"))
-        .pipe(gulp.dest("dist/vendor/"));
+        .pipe(gulp.dest(`${DIST_SRC}vendor/`));
 });
 
 gulp.task("watch:vendor:js:npm", () => {
