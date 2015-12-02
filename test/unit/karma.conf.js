@@ -7,13 +7,12 @@ module.exports = function configure(config) {
             "node_modules/babel-polyfill/dist/polyfill.js",
             "bower_components/es6-module-loader/dist/es6-module-loader.src.js",
             "bower_components/system.js/dist/system.src.js",
-            "src/app/**/*.js",
+            "dist/src/app/**/*.js",
             "test/unit/**/*.spec.js",
             "test/unit/karma.start.js"
         ],
         browsers: ["PhantomJS"],
         preprocessors: {
-            "src/app/**/*.js": ["babelES2015SystemJS"],
             "test/unit/**/*.spec.js": ["babelES2015SystemJS"],
             "test/unit/karma.start.js": ["babelES2015"]
         },

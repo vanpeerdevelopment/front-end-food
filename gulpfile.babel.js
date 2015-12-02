@@ -42,9 +42,22 @@ gulp.task("deploy", () => {
 /*
  * helper tasks
  */
-gulp.task("build", ["build:app", "build:vendor", "lint", "test"]);
-gulp.task("dev", ["build:app", "build:vendor", "watch", "serve"]);
-gulp.task("watch", ["watch:app", "watch:vendor", "watch:test"]);
+let test = singleRunEnabled => {
+    return callback => {
+        new karma.Server({
+            configFile: `${__dirname}/test/unit/karma.conf.js`,
+            singleRun: singleRunEnabled
+        },
+        callback)
+        .start();
+    };
+};
+
+let testSingleRun = test(true);
+let testWatch = test(false);
+
+gulp.task("build", ["build:app", "build:vendor", "lint"], testSingleRun);
+gulp.task("dev", ["build:app", "build:vendor", "watch:app", "watch:vendor", "serve"], testWatch);
 
 gulp.task("build:app", ["build:app:src"]);
 gulp.task("watch:app", ["watch:app:src"]);
@@ -68,23 +81,6 @@ gulp.task("lint", () => {
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
-});
-
-gulp.task("test", callback => {
-    new karma.Server({
-        configFile: `${__dirname}/test/unit/karma.conf.js`,
-        singleRun: true
-    },
-    callback)
-    .start();
-});
-
-gulp.task("watch:test", callback => {
-    new karma.Server({
-        configFile: `${__dirname}/test/unit/karma.conf.js`
-    },
-    callback)
-    .start();
 });
 
 gulp.task("serve", () => {
