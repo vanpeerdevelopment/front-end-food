@@ -95,12 +95,6 @@ gulp.task("serve", () => {
 });
 
 /*
- * app
- */
-/*
- * src
- */
-/*
  * app:src:js
  */
 gulp.task("build:app:src:js", () => {
@@ -161,12 +155,6 @@ gulp.task("watch:app:src:cname", () => {
 gulp.task("watch:app:src:cname:build", ["build:app:src:cname"], browserSyncServer.reload);
 
 /*
- * app
- */
-/*
- * test
- */
-/*
  * app:test:js
  */
 gulp.task("build:app:test:js", () => {
@@ -186,12 +174,6 @@ gulp.task("watch:app:test:js", () => {
     gulp.watch(["test/unit/**/*.spec.js"], ["build:app:test:js"]);
 });
 
-/*
- * vendor
- */
-/*
- * vendor:js
- */
 /*
  * vendor:js:bower
  */
