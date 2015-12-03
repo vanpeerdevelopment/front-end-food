@@ -19,7 +19,6 @@ module.exports = function configure(config) {
         reporters: ["mocha"],
         plugins: [
             "karma-phantomjs-launcher",
-            "karma-babel-preprocessor",
             "karma-mocha",
             "karma-chai-sinon",
             "karma-mocha-reporter"
