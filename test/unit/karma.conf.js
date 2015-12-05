@@ -4,9 +4,9 @@ module.exports = function configure(config) {
     config.set({
         basePath: "../..",
         files: [
-            "node_modules/babel-polyfill/dist/polyfill.js",
-            "bower_components/es6-module-loader/dist/es6-module-loader.src.js",
-            "bower_components/system.js/dist/system.src.js",
+            "dist/src/vendor/polyfill.min.js",
+            "dist/src/vendor/es6-module-loader.min.js",
+            "dist/src/vendor/system.min.js",
             "dist/src/app/**/*.js",
             "dist/test/unit/**/*.spec.js",
             "test/unit/karma.bootstrap.js"
