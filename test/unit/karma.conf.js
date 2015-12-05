@@ -9,6 +9,11 @@ module.exports = function configure(config) {
             "dist/src/vendor/system.min.js",
             "dist/src/app/**/*.js",
             "dist/test/unit/**/*.spec.js",
+            {
+                pattern: "**/*.js.map",
+                watched: false,
+                included: false
+            },
             "test/unit/karma.bootstrap.js"
         ],
         browsers: ["PhantomJS"],
