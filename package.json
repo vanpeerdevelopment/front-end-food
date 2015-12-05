@@ -17,7 +17,7 @@
     },
     "dependencies": {
         "angular-new-router": "~0.5.3",
-        "babel-polyfill": "~6.2.0"
+        "babel-polyfill": "~6.3.14"
     },
     "devDependencies": {
         "babel-core": "~6.3.2",
