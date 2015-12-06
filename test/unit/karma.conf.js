@@ -10,7 +10,7 @@ module.exports = function configure(config) {
             "dist/src/app/**/*.js",
             "dist/test/unit/**/*.spec.js",
             {
-                pattern: "**/*.js.map",
+                pattern: "dist/**/*.js.map",
                 watched: false,
                 included: false
             },
