@@ -17,9 +17,24 @@ import browserSync from "browser-sync";
 import ghPages from "gulp-gh-pages";
 
 const browserSyncServer = browserSync.create("front-end-food");
-const DIST = "dist/";
-const DIST_SRC = `${DIST}src/`;
-const DIST_TEST = `${DIST}test/`;
+
+let paths = {
+    gulpfile: "gulpfile.babel.js",
+    bower: "bower.json",
+    npm: "package.json",
+    srcAppJs: "src/app/**/*.js",
+    srcAppHtml: "src/app/**/*.html",
+    indexHtml: "src/index.html",
+    cname: "src/CNAME",
+    testUnitJs: "test/unit/**/*.js",
+    testUnitSpecJs: "test/unit/**/*.spec.js",
+    dist: "dist/",
+    distSrc: "dist/src/",
+    distSrcApp: "dist/src/app/",
+    distSrcVendor: "dist/src/vendor/",
+    distTestUnit: "dist/test/unit/",
+    deploy: "dist/src/**/*"
+};
 
 /*
  * main tasks
@@ -36,7 +51,7 @@ gulp.task("clean:dev", callback => {
 
 gulp.task("deploy", () => {
     return gulp
-        .src(`${DIST_SRC}**/*`)
+        .src(paths.deploy)
         .pipe(ghPages());
 });
 
@@ -76,11 +91,11 @@ gulp.task("watch:vendor:js", ["watch:vendor:js:bower", "watch:vendor:js:npm"]);
  * general
  */
 gulp.task("clean", () => {
-    return del(DIST);
+    return del(paths.dist);
 });
 
 gulp.task("lint", () => {
-    return gulp.src(["gulpfile.babel.js", "src/app/**/*.js", "test/unit/**/*.js"])
+    return gulp.src([paths.gulpfile, paths.srcAppJs, paths.testUnitJs])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
@@ -89,7 +104,7 @@ gulp.task("lint", () => {
 gulp.task("serve", () => {
     browserSyncServer.init({
         server: {
-            baseDir: DIST_SRC
+            baseDir: paths.distSrc
         }
     });
 });
@@ -99,7 +114,7 @@ gulp.task("serve", () => {
  */
 gulp.task("build:app:src:js", () => {
     return gulp
-        .src(["src/app/**/*.js"])
+        .src(paths.srcAppJs)
         .pipe(sourceMaps.init())
         .pipe(babel({
             moduleIds: true,
@@ -113,11 +128,11 @@ gulp.task("build:app:src:js", () => {
             suffix: ".min"
         }))
         .pipe(sourceMaps.write("./"))
-        .pipe(gulp.dest(`${DIST_SRC}app/`));
+        .pipe(gulp.dest(paths.distSrcApp));
 });
 
 gulp.task("watch:app:src:js", () => {
-    gulp.watch(["src/app/**/*.js"], ["watch:app:src:js:build"]);
+    gulp.watch(paths.srcAppJs, ["watch:app:src:js:build"]);
 });
 
 gulp.task("watch:app:src:js:build", ["build:app:src:js"], browserSyncServer.reload);
@@ -127,14 +142,14 @@ gulp.task("watch:app:src:js:build", ["build:app:src:js"], browserSyncServer.relo
  */
 gulp.task("build:app:src:html", () => {
     return gulp
-        .src(["src/index.html", "src/app/**/*.html"], {
+        .src([paths.indexHtml, paths.srcAppHtml], {
             base: "src"
         })
-        .pipe(gulp.dest(DIST_SRC));
+        .pipe(gulp.dest(paths.distSrc));
 });
 
 gulp.task("watch:app:src:html", () => {
-    gulp.watch(["src/index.html", "src/app/**/*.html"], ["watch:app:src:html:build"]);
+    gulp.watch([paths.indexHtml, paths.srcAppHtml], ["watch:app:src:html:build"]);
 });
 
 gulp.task("watch:app:src:html:build", ["build:app:src:html"], browserSyncServer.reload);
@@ -144,12 +159,12 @@ gulp.task("watch:app:src:html:build", ["build:app:src:html"], browserSyncServer.
  */
 gulp.task("build:app:src:cname", () => {
     return gulp
-        .src(["src/CNAME"])
-        .pipe(gulp.dest(DIST_SRC));
+        .src(paths.cname)
+        .pipe(gulp.dest(paths.distSrc));
 });
 
 gulp.task("watch:app:src:cname", () => {
-    gulp.watch(["src/CNAME"], ["watch:app:src:cname:build"]);
+    gulp.watch(paths.cname, ["watch:app:src:cname:build"]);
 });
 
 gulp.task("watch:app:src:cname:build", ["build:app:src:cname"], browserSyncServer.reload);
@@ -159,7 +174,7 @@ gulp.task("watch:app:src:cname:build", ["build:app:src:cname"], browserSyncServe
  */
 gulp.task("build:app:test:js", () => {
     return gulp
-        .src(["test/unit/**/*.spec.js"])
+        .src(paths.testUnitSpecJs)
         .pipe(sourceMaps.init())
         .pipe(babel({
             moduleIds: true,
@@ -167,11 +182,11 @@ gulp.task("build:app:test:js", () => {
             plugins: ["transform-es2015-modules-systemjs"]
         }))
         .pipe(sourceMaps.write("./"))
-        .pipe(gulp.dest(`${DIST_TEST}unit/`));
+        .pipe(gulp.dest(paths.distTestUnit));
 });
 
 gulp.task("watch:app:test:js", () => {
-    gulp.watch(["test/unit/**/*.spec.js"], ["build:app:test:js"]);
+    gulp.watch(paths.testUnitSpecJs, ["build:app:test:js"]);
 });
 
 /*
@@ -190,11 +205,11 @@ gulp.task("build:vendor:js:bower", () => {
             suffix: ".min"
         }))
         .pipe(sourceMaps.write("./"))
-        .pipe(gulp.dest(`${DIST_SRC}vendor/`));
+        .pipe(gulp.dest(paths.distSrcVendor));
 });
 
 gulp.task("watch:vendor:js:bower", () => {
-    gulp.watch(["bower.json"], ["watch:vendor:js:bower:build"]);
+    gulp.watch(paths.bower, ["watch:vendor:js:bower:build"]);
 });
 
 gulp.task("watch:vendor:js:bower:build", ["build:vendor:js:bower"], browserSyncServer.reload);
@@ -214,11 +229,11 @@ gulp.task("build:vendor:js:npm", () => {
             suffix: ".min"
         }))
         .pipe(sourceMaps.write("./"))
-        .pipe(gulp.dest(`${DIST_SRC}vendor/`));
+        .pipe(gulp.dest(paths.distSrcVendor));
 });
 
 gulp.task("watch:vendor:js:npm", () => {
-    gulp.watch(["package.json"], ["watch:vendor:js:npm:build"]);
+    gulp.watch(paths.npm, ["watch:vendor:js:npm:build"]);
 });
 
 gulp.task("watch:vendor:js:npm:build", ["build:vendor:js:npm"], browserSyncServer.reload);
