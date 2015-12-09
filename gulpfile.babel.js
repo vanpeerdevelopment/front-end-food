@@ -117,7 +117,8 @@ gulp.task("serve", callback => {
         {
             server: {
                 baseDir: paths.distSrc
-            }
+            },
+            files: `${paths.distSrc}**/*`
         },
         callback
     );
@@ -146,10 +147,8 @@ gulp.task("build:app:src:js", () => {
 });
 
 gulp.task("watch:app:src:js", () => {
-    gulp.watch(paths.srcAppJs, ["watch:app:src:js:build"]);
+    gulp.watch(paths.srcAppJs, ["build:app:src:js"]);
 });
-
-gulp.task("watch:app:src:js:build", ["build:app:src:js"], browserSyncServer.reload);
 
 /*
  * app:src:html
@@ -163,10 +162,8 @@ gulp.task("build:app:src:html", () => {
 });
 
 gulp.task("watch:app:src:html", () => {
-    gulp.watch([paths.indexHtml, paths.srcAppHtml], ["watch:app:src:html:build"]);
+    gulp.watch([paths.indexHtml, paths.srcAppHtml], ["build:app:src:html"]);
 });
-
-gulp.task("watch:app:src:html:build", ["build:app:src:html"], browserSyncServer.reload);
 
 /*
  * app:src:cname
@@ -178,10 +175,8 @@ gulp.task("build:app:src:cname", () => {
 });
 
 gulp.task("watch:app:src:cname", () => {
-    gulp.watch(paths.cname, ["watch:app:src:cname:build"]);
+    gulp.watch(paths.cname, ["build:app:src:cname"]);
 });
-
-gulp.task("watch:app:src:cname:build", ["build:app:src:cname"], browserSyncServer.reload);
 
 /*
  * app:test:js
@@ -223,10 +218,8 @@ gulp.task("build:vendor:js:bower", () => {
 });
 
 gulp.task("watch:vendor:js:bower", () => {
-    gulp.watch(paths.bower, ["watch:vendor:js:bower:build"]);
+    gulp.watch(paths.bower, ["build:vendor:js:bower"]);
 });
-
-gulp.task("watch:vendor:js:bower:build", ["build:vendor:js:bower"], browserSyncServer.reload);
 
 /*
  * vendor:js:npm
@@ -247,7 +240,5 @@ gulp.task("build:vendor:js:npm", () => {
 });
 
 gulp.task("watch:vendor:js:npm", () => {
-    gulp.watch(paths.npm, ["watch:vendor:js:npm:build"]);
+    gulp.watch(paths.npm, ["build:vendor:js:npm"]);
 });
-
-gulp.task("watch:vendor:js:npm:build", ["build:vendor:js:npm"], browserSyncServer.reload);
