@@ -3,6 +3,7 @@
 import gulp from "gulp";
 import runSequence from "run-sequence";
 import del from "del";
+import plumber from "gulp-plumber";
 import sourceMaps from "gulp-sourcemaps";
 import babel from "gulp-babel";
 import concat from "gulp-concat";
@@ -86,7 +87,9 @@ gulp.task("clean", () => {
 });
 
 gulp.task("lint", () => {
-    return gulp.src([paths.gulpfile, paths.srcAppJs, paths.testUnitJs])
+    return gulp
+        .src([paths.gulpfile, paths.srcAppJs, paths.testUnitJs])
+        .pipe(plumber())
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
@@ -130,6 +133,7 @@ gulp.task("serve", callback => {
 gulp.task("build:app:src:js", () => {
     return gulp
         .src(paths.srcAppJs)
+        .pipe(plumber())
         .pipe(sourceMaps.init())
         .pipe(babel({
             moduleIds: true,
@@ -158,6 +162,7 @@ gulp.task("build:app:src:html", () => {
         .src([paths.indexHtml, paths.srcAppHtml], {
             base: "src"
         })
+        .pipe(plumber())
         .pipe(gulp.dest(paths.distSrc));
 });
 
@@ -171,6 +176,7 @@ gulp.task("watch:app:src:html", () => {
 gulp.task("build:app:src:cname", () => {
     return gulp
         .src(paths.cname)
+        .pipe(plumber())
         .pipe(gulp.dest(paths.distSrc));
 });
 
@@ -184,6 +190,7 @@ gulp.task("watch:app:src:cname", () => {
 gulp.task("build:app:test:js", () => {
     return gulp
         .src(paths.testUnitSpecJs)
+        .pipe(plumber())
         .pipe(sourceMaps.init())
         .pipe(babel({
             moduleIds: true,
@@ -207,6 +214,7 @@ gulp.task("build:vendor:js:bower", () => {
             checkExistence: true,
             filter: "**/*.js"
         }))
+        .pipe(plumber())
         .pipe(extReplace(".js", ".src.js"))
         .pipe(sourceMaps.init())
         .pipe(uglify())
@@ -230,6 +238,7 @@ gulp.task("build:vendor:js:npm", () => {
             "node_modules/angular-new-router/dist/router.es5.js",
             "node_modules/babel-polyfill/dist/polyfill.js"
         ])
+        .pipe(plumber())
         .pipe(sourceMaps.init())
         .pipe(uglify())
         .pipe(rename({
