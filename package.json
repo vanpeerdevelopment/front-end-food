@@ -27,7 +27,7 @@
         "browser-sync": "~2.10.0",
         "chai": "~3.4.1",
         "del": "~2.2.0",
-        "eslint-plugin-angular": "~0.14.0",
+        "eslint-plugin-angular": "~0.15.0",
         "eslint-plugin-babel": "~3.0.0",
         "gulp": "~3.9.0",
         "gulp-babel": "~6.1.0",

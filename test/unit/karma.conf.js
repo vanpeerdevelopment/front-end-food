@@ -1,4 +1,4 @@
-/* global module*/
+/* global module */
 
 module.exports = function configure(config) {
     config.set({
