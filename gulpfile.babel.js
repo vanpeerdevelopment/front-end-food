@@ -42,11 +42,19 @@ let paths = {
 gulp.task("default", ["clean:build"]);
 
 gulp.task("clean:build", callback => {
-    runSequence("clean", "build", callback);
+    runSequence(
+        "clean",
+        ["build:app", "build:vendor", "lint"],
+        "test",
+        callback);
 });
 
 gulp.task("clean:dev", callback => {
-    runSequence("clean", "dev", callback);
+    runSequence(
+        "clean",
+        ["build:app", "build:vendor", "lint"],
+        ["watch:app", "watch:vendor", "watch:test", "serve"],
+        callback);
 });
 
 gulp.task("deploy", () => {
@@ -58,23 +66,6 @@ gulp.task("deploy", () => {
 /*
  * helper tasks
  */
-let test = singleRunEnabled => {
-    return callback => {
-        new karma.Server({
-            configFile: `${__dirname}/test/unit/karma.conf.js`,
-            singleRun: singleRunEnabled
-        },
-        callback)
-        .start();
-    };
-};
-
-let testSingleRun = test(true);
-let testWatch = test(false);
-
-gulp.task("build", ["build:app", "build:vendor", "lint"], testSingleRun);
-gulp.task("dev", ["build:app", "build:vendor", "watch:app", "watch:vendor", "serve"], testWatch);
-
 gulp.task("build:app", ["build:app:src", "build:app:test"]);
 gulp.task("watch:app", ["watch:app:src", "watch:app:test"]);
 gulp.task("build:app:src", ["build:app:src:js", "build:app:src:html", "build:app:src:cname"]);
@@ -101,12 +92,35 @@ gulp.task("lint", () => {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task("serve", () => {
-    browserSyncServer.init({
-        server: {
-            baseDir: paths.distSrc
-        }
-    });
+gulp.task("test", callback => {
+    new karma.Server(
+        {
+            configFile: `${__dirname}/test/unit/karma.conf.js`,
+            singleRun: true
+        },
+        callback)
+    .start();
+});
+
+gulp.task("watch:test", callback => {
+    new karma.Server(
+        {
+            configFile: `${__dirname}/test/unit/karma.conf.js`,
+            singleRun: false
+        },
+        callback)
+    .start();
+});
+
+gulp.task("serve", callback => {
+    browserSyncServer.init(
+        {
+            server: {
+                baseDir: paths.distSrc
+            }
+        },
+        callback
+    );
 });
 
 /*
