@@ -89,7 +89,6 @@ gulp.task("clean", () => {
 gulp.task("lint", () => {
     return gulp
         .src([paths.gulpfile, paths.srcAppJs, paths.testUnitJs])
-        .pipe(plumber())
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
@@ -162,7 +161,6 @@ gulp.task("build:app:src:html", () => {
         .src([paths.indexHtml, paths.srcAppHtml], {
             base: "src"
         })
-        .pipe(plumber())
         .pipe(gulp.dest(paths.distSrc));
 });
 
@@ -176,7 +174,6 @@ gulp.task("watch:app:src:html", () => {
 gulp.task("build:app:src:cname", () => {
     return gulp
         .src(paths.cname)
-        .pipe(plumber())
         .pipe(gulp.dest(paths.distSrc));
 });
 
