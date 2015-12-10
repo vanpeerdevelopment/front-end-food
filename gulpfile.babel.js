@@ -40,9 +40,9 @@ let paths = {
 /*
  * main tasks
  */
-gulp.task("default", ["clean:build"]);
+gulp.task("default", ["build"]);
 
-gulp.task("clean:build", callback => {
+gulp.task("build", callback => {
     runSequence(
         "clean",
         ["build:app", "build:vendor", "lint"],
@@ -50,10 +50,9 @@ gulp.task("clean:build", callback => {
         callback);
 });
 
-gulp.task("clean:dev", callback => {
+gulp.task("dev", callback => {
     runSequence(
-        "clean",
-        ["build:app", "build:vendor", "lint"],
+        "build",
         ["watch:app", "watch:vendor", "watch:test", "serve"],
         callback);
 });
