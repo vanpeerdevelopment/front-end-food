@@ -1,6 +1,7 @@
 /* globals exports */
 
 exports.config = {
+    baseUrl: "http://localhost:3000",
     framework: "mocha",
     mochaOpts: {
         reporter: "spec",

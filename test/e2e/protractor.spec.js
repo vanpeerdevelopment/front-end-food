@@ -9,7 +9,7 @@ var expect = chai.expect;
 
 describe("Front End Food", function frontEndFood() {
     it("should have a title", function shouldHaveTitle() {
-        browser.get("http://localhost:3000");
+        browser.get("");
 
         expect(browser.getTitle()).to.eventually.equal("Front End Food");
         expect(element(by.binding("home.title")).getText()).to.eventually.equal("Front End Food");
