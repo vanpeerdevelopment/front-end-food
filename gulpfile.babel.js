@@ -27,7 +27,7 @@ let paths = {
     cname: "src/CNAME",
     srcAppJs: "src/app/**/*.js",
     srcAppHtml: "src/app/**/*.html",
-    testUnitJs: "test/unit/**/*.js",
+    testJs: "test/**/*.js",
     testUnitSpecJs: "test/unit/**/*.spec.js",
     dist: "dist/",
     distSrc: "dist/src/",
@@ -87,7 +87,7 @@ gulp.task("clean", () => {
 
 gulp.task("lint", () => {
     return gulp
-        .src([paths.gulpfile, paths.srcAppJs, paths.testUnitJs])
+        .src([paths.gulpfile, paths.srcAppJs, paths.testJs])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
