@@ -102,77 +102,6 @@ gulp.task("lint", () => {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task("protractor-qa", () => {
-    protractorQA.init({
-        runOnce: true,
-        testSrc: `${paths.distTestE2E}**/!(e2e).js`,
-        viewSrc: paths.srcAppHtml
-    });
-});
-
-gulp.task("watch:protractor-qa", () => {
-    protractorQA.init({
-        runOnce: false,
-        testSrc: `${paths.distTestE2E}**/!(e2e).js`,
-        viewSrc: paths.srcAppHtml
-    });
-});
-
-gulp.task("test:unit", callback => {
-    new karma.Server(
-        {
-            configFile: `${__dirname}/test/unit/karma.conf.js`,
-            singleRun: true
-        },
-        callback)
-    .start();
-});
-
-gulp.task("watch:test:unit", callback => {
-    new karma.Server(
-        {
-            configFile: `${__dirname}/test/unit/karma.conf.js`,
-            singleRun: false
-        },
-        callback)
-    .start();
-});
-
-gulp.task("test:e2e", callback => {
-    runSequence(
-        "test:e2e:server:start",
-        "test:e2e:protractor",
-        "test:e2e:server:stop",
-        callback);
-});
-
-gulp.task("test:e2e:server:start", callback => {
-    browserSyncServer.init(
-        {
-            open: false,
-            server: {
-                baseDir: paths.distSrc
-            }
-        },
-        callback
-    );
-});
-
-gulp.task("test:e2e:protractor", () => {
-    return gulp
-        .src(`${paths.testE2E}protractor.bootstrap.js`)
-        .pipe(protractor({
-            configFile: `${paths.testE2E}protractor.conf.js`
-        }))
-        .on("error", err => {
-            throw err;
-        });
-});
-
-gulp.task("test:e2e:server:stop", () => {
-    browserSyncServer.exit();
-});
-
 gulp.task("serve", callback => {
     browserSyncServer.init(
         {
@@ -261,6 +190,24 @@ gulp.task("watch:app:test:unit", () => {
     gulp.watch(paths.testUnitJs, ["build:app:test:unit"]);
 });
 
+let unitTest = (singleRun, callback) => {
+    new karma.Server(
+        {
+            configFile: `${__dirname}/test/unit/karma.conf.js`,
+            singleRun
+        },
+        callback)
+    .start();
+};
+
+gulp.task("test:unit", callback => {
+    unitTest(true, callback);
+});
+
+gulp.task("watch:test:unit", callback => {
+    unitTest(false, callback);
+});
+
 /*
  * app:test:e2e
  */
@@ -282,6 +229,57 @@ gulp.task("build:app:test:e2e", () => {
 
 gulp.task("watch:app:test:e2e", () => {
     gulp.watch(paths.testE2EJs, ["build:app:test:e2e"]);
+});
+
+let startProtractorQA = runOnce => {
+    protractorQA.init({
+        runOnce,
+        testSrc: `${paths.distTestE2E}**/!(e2e).js`,
+        viewSrc: paths.srcAppHtml
+    });
+};
+
+gulp.task("protractor-qa", () => {
+    startProtractorQA(true);
+});
+
+gulp.task("watch:protractor-qa", () => {
+    startProtractorQA(false);
+});
+
+gulp.task("test:e2e", callback => {
+    runSequence(
+        "test:e2e:server:start",
+        "test:e2e:protractor",
+        "test:e2e:server:stop",
+        callback);
+});
+
+gulp.task("test:e2e:server:start", callback => {
+    browserSyncServer.init(
+        {
+            open: false,
+            server: {
+                baseDir: paths.distSrc
+            }
+        },
+        callback
+    );
+});
+
+gulp.task("test:e2e:protractor", () => {
+    return gulp
+        .src(`${paths.testE2E}protractor.bootstrap.js`)
+        .pipe(protractor({
+            configFile: `${paths.testE2E}protractor.conf.js`
+        }))
+        .on("error", err => {
+            throw err;
+        });
+});
+
+gulp.task("test:e2e:server:stop", () => {
+    browserSyncServer.exit();
 });
 
 /*
