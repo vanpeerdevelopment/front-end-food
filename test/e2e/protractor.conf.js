@@ -1,4 +1,4 @@
-/* globals exports, require */
+/* global exports, require */
 /* eslint global-require: 0 */
 
 exports.config = {

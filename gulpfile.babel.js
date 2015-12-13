@@ -13,10 +13,12 @@ import rename from "gulp-rename";
 import extReplace from "gulp-ext-replace";
 import eslint from "gulp-eslint";
 import karma from "karma";
+import protractorLib from "gulp-protractor";
 import mainBowerFiles from "main-bower-files";
 import browserSync from "browser-sync";
 import ghPages from "gulp-gh-pages";
 
+const protractor = protractorLib.protractor;
 const browserSyncServer = browserSync.create("front-end-food");
 
 let paths = {
@@ -30,6 +32,7 @@ let paths = {
     testJs: "test/**/*.js",
     testUnitJs: "test/unit/**/*.js",
     testE2EJs: "test/e2e/**/*.js",
+    testE2E: "test/e2e/",
     dist: "dist/",
     distSrc: "dist/src/",
     distSrcApp: "dist/src/app/",
@@ -48,14 +51,15 @@ gulp.task("build", callback => {
     runSequence(
         "clean",
         ["build:app", "build:vendor", "lint"],
-        "test",
+        "test:unit",
+        "test:e2e",
         callback);
 });
 
 gulp.task("dev", callback => {
     runSequence(
         "build",
-        ["watch:app", "watch:vendor", "watch:test", "serve"],
+        ["watch:app", "watch:vendor", "watch:test:unit", "serve"],
         callback);
 });
 
@@ -95,7 +99,7 @@ gulp.task("lint", () => {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task("test", callback => {
+gulp.task("test:unit", callback => {
     new karma.Server(
         {
             configFile: `${__dirname}/test/unit/karma.conf.js`,
@@ -105,7 +109,7 @@ gulp.task("test", callback => {
     .start();
 });
 
-gulp.task("watch:test", callback => {
+gulp.task("watch:test:unit", callback => {
     new karma.Server(
         {
             configFile: `${__dirname}/test/unit/karma.conf.js`,
@@ -113,6 +117,37 @@ gulp.task("watch:test", callback => {
         },
         callback)
     .start();
+});
+
+gulp.task("test:e2e", callback => {
+    runSequence("test:e2e:server:start", "test:e2e:protractor", "test:e2e:server:stop", callback);
+});
+
+gulp.task("test:e2e:server:start", callback => {
+    browserSyncServer.init(
+        {
+            open: false,
+            server: {
+                baseDir: paths.distSrc
+            }
+        },
+        callback
+    );
+});
+
+gulp.task("test:e2e:protractor", () => {
+    return gulp
+        .src(`${paths.testE2E}protractor.bootstrap.js`)
+        .pipe(protractor({
+            configFile: `${paths.testE2E}protractor.conf.js`
+        }))
+        .on("error", err => {
+            throw err;
+        });
+});
+
+gulp.task("test:e2e:server:stop", () => {
+    browserSyncServer.exit();
 });
 
 gulp.task("serve", callback => {
