@@ -120,7 +120,11 @@ gulp.task("watch:test:unit", callback => {
 });
 
 gulp.task("test:e2e", callback => {
-    runSequence("test:e2e:server:start", "test:e2e:protractor", "test:e2e:server:stop", callback);
+    runSequence(
+        "test:e2e:server:start",
+        "test:e2e:protractor",
+        "test:e2e:server:stop",
+        callback);
 });
 
 gulp.task("test:e2e:server:start", callback => {
