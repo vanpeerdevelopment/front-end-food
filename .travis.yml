@@ -14,7 +14,10 @@ install:
     - bower install
     - node_modules/protractor/bin/webdriver-manager update
 
-before_script: npm install -g gulp
+before_script:
+    - "export DISPLAY=:99.0"
+    - "sh -e /etc/init.d/xvfb start"
+    - npm install -g gulp
 script: gulp
 
 after_success:
