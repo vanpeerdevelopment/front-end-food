@@ -29,11 +29,13 @@ let paths = {
     srcAppHtml: "src/app/**/*.html",
     testJs: "test/**/*.js",
     testUnitSpecJs: "test/unit/**/*.spec.js",
+    testE2ESpecJs: "test/e2e/**/*.spec.js",
     dist: "dist/",
     distSrc: "dist/src/",
     distSrcApp: "dist/src/app/",
     distSrcVendor: "dist/src/vendor/",
     distTestUnit: "dist/test/unit/",
+    distTestE2E: "dist/test/e2e/",
     deploy: "dist/src/**/*"
 };
 
@@ -70,8 +72,8 @@ gulp.task("build:app", ["build:app:src", "build:app:test"]);
 gulp.task("watch:app", ["watch:app:src", "watch:app:test"]);
 gulp.task("build:app:src", ["build:app:src:js", "build:app:src:html", "build:app:src:cname"]);
 gulp.task("watch:app:src", ["watch:app:src:js", "watch:app:src:html", "watch:app:src:cname"]);
-gulp.task("build:app:test", ["build:app:test:js"]);
-gulp.task("watch:app:test", ["watch:app:test:js"]);
+gulp.task("build:app:test", ["build:app:test:unit", "build:app:test:e2e"]);
+gulp.task("watch:app:test", ["watch:app:test:unit", "watch:app:test:e2e"]);
 
 gulp.task("build:vendor", ["build:vendor:js"]);
 gulp.task("watch:vendor", ["watch:vendor:js"]);
@@ -181,9 +183,9 @@ gulp.task("watch:app:src:cname", () => {
 });
 
 /*
- * app:test:js
+ * app:test:unit
  */
-gulp.task("build:app:test:js", () => {
+gulp.task("build:app:test:unit", () => {
     return gulp
         .src(paths.testUnitSpecJs)
         .pipe(plumber())
@@ -197,8 +199,27 @@ gulp.task("build:app:test:js", () => {
         .pipe(gulp.dest(paths.distTestUnit));
 });
 
-gulp.task("watch:app:test:js", () => {
-    gulp.watch(paths.testUnitSpecJs, ["build:app:test:js"]);
+gulp.task("watch:app:test:unit", () => {
+    gulp.watch(paths.testUnitSpecJs, ["build:app:test:unit"]);
+});
+
+/*
+ * app:test:e2e
+ */
+gulp.task("build:app:test:e2e", () => {
+    return gulp
+        .src(paths.testE2ESpecJs)
+        .pipe(plumber())
+        .pipe(sourceMaps.init())
+        .pipe(babel({
+            presets: ["es2015"]
+        }))
+        .pipe(sourceMaps.write("./"))
+        .pipe(gulp.dest(paths.distTestE2E));
+});
+
+gulp.task("watch:app:test:e2e", () => {
+    gulp.watch(paths.testE2ESpecJs, ["build:app:test:e2e"]);
 });
 
 /*

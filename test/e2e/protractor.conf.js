@@ -9,7 +9,7 @@ exports.config = {
     },
 
     baseUrl: "http://localhost:3000",
-    specs: ["spec/protractor.spec.js"],
+    specs: ["../../dist/test/e2e/spec/protractor.spec.js"],
 
     seleniumServerJar: "../../node_modules/protractor/selenium/selenium-server-standalone-2.48.2.jar",
     capabilities: {

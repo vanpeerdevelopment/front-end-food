@@ -1,9 +1,6 @@
 {
     "env": {
         protractor: true,
-        jasmine: true
-    },
-    "rules": {
-        "prefer-arrow-callback": 0
+        mocha: true
     }
 }

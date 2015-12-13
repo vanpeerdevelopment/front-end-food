@@ -1,14 +1,13 @@
 /* globals require */
-/* eslint no-var:0 no-shadow:0, vars-on-top: 0 */
 
-var chai = require("chai");
-var chaiAsPromised = require("chai-as-promised");
+let chai = require("chai");
+let chaiAsPromised = require("chai-as-promised");
 
 chai.use(chaiAsPromised);
-var expect = chai.expect;
+let expect = chai.expect;
 
-describe("Front End Food", function frontEndFood() {
-    it("should have a title", function shouldHaveTitle() {
+describe("Front End Food", () => {
+    it("should have a title", () => {
         browser.get("");
 
         expect(browser.getTitle()).to.eventually.equal("Front End Food");
