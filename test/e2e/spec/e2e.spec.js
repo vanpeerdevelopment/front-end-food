@@ -1,10 +1,4 @@
-/* globals require */
-
-let chai = require("chai");
-let chaiAsPromised = require("chai-as-promised");
-
-chai.use(chaiAsPromised);
-let expect = chai.expect;
+import expect from "config/chai.config";
 
 describe("Front End Food", () => {
     it("should have a title", () => {

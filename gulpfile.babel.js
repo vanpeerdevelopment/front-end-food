@@ -28,8 +28,8 @@ let paths = {
     srcAppJs: "src/app/**/*.js",
     srcAppHtml: "src/app/**/*.html",
     testJs: "test/**/*.js",
-    testUnitSpecJs: "test/unit/**/*.spec.js",
-    testE2ESpecJs: "test/e2e/**/*.spec.js",
+    testUnitJs: "test/unit/**/*.js",
+    testE2EJs: "test/e2e/**/*.js",
     dist: "dist/",
     distSrc: "dist/src/",
     distSrcApp: "dist/src/app/",
@@ -187,7 +187,7 @@ gulp.task("watch:app:src:cname", () => {
  */
 gulp.task("build:app:test:unit", () => {
     return gulp
-        .src(paths.testUnitSpecJs)
+        .src(paths.testUnitJs)
         .pipe(plumber())
         .pipe(sourceMaps.init())
         .pipe(babel({
@@ -200,7 +200,7 @@ gulp.task("build:app:test:unit", () => {
 });
 
 gulp.task("watch:app:test:unit", () => {
-    gulp.watch(paths.testUnitSpecJs, ["build:app:test:unit"]);
+    gulp.watch(paths.testUnitJs, ["build:app:test:unit"]);
 });
 
 /*
@@ -208,18 +208,21 @@ gulp.task("watch:app:test:unit", () => {
  */
 gulp.task("build:app:test:e2e", () => {
     return gulp
-        .src(paths.testE2ESpecJs)
+        .src(paths.testE2EJs)
         .pipe(plumber())
         .pipe(sourceMaps.init())
         .pipe(babel({
-            presets: ["es2015"]
+            moduleIds: true,
+            presets: ["es2015"],
+            plugins: ["transform-es2015-modules-systemjs"]
         }))
+        .pipe(concat("e2e.js"))
         .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest(paths.distTestE2E));
 });
 
 gulp.task("watch:app:test:e2e", () => {
-    gulp.watch(paths.testE2ESpecJs, ["build:app:test:e2e"]);
+    gulp.watch(paths.testE2EJs, ["build:app:test:e2e"]);
 });
 
 /*
