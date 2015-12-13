@@ -14,6 +14,7 @@ import extReplace from "gulp-ext-replace";
 import eslint from "gulp-eslint";
 import karma from "karma";
 import protractorLib from "gulp-protractor";
+import protractorQA from "gulp-protractor-qa";
 import mainBowerFiles from "main-bower-files";
 import browserSync from "browser-sync";
 import ghPages from "gulp-gh-pages";
@@ -32,6 +33,7 @@ let paths = {
     testJs: "test/**/*.js",
     testUnitJs: "test/unit/**/*.js",
     testE2EJs: "test/e2e/**/*.js",
+    testE2ESpecJs: "test/e2e/**/*.spec.js",
     testE2E: "test/e2e/",
     dist: "dist/",
     distSrc: "dist/src/",
@@ -50,7 +52,8 @@ gulp.task("default", ["build"]);
 gulp.task("build", callback => {
     runSequence(
         "clean",
-        ["build:app", "build:vendor", "lint"],
+        ["build:app", "build:vendor"],
+        ["lint", "protractor-qa"],
         "test:unit",
         "test:e2e",
         callback);
@@ -59,7 +62,7 @@ gulp.task("build", callback => {
 gulp.task("dev", callback => {
     runSequence(
         "build",
-        ["watch:app", "watch:vendor", "watch:test:unit", "serve"],
+        ["watch:app", "watch:vendor", "watch:test:unit", "watch:protractor-qa", "serve"],
         callback);
 });
 
@@ -97,6 +100,22 @@ gulp.task("lint", () => {
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
+});
+
+gulp.task("protractor-qa", () => {
+    protractorQA.init({
+        runOnce: true,
+        testSrc: `${paths.distTestE2E}**/!(e2e).js`,
+        viewSrc: paths.srcAppHtml
+    });
+});
+
+gulp.task("watch:protractor-qa", () => {
+    protractorQA.init({
+        runOnce: false,
+        testSrc: `${paths.distTestE2E}**/!(e2e).js`,
+        viewSrc: paths.srcAppHtml
+    });
 });
 
 gulp.task("test:unit", callback => {
@@ -255,6 +274,7 @@ gulp.task("build:app:test:e2e", () => {
             presets: ["es2015"],
             plugins: ["transform-es2015-modules-systemjs"]
         }))
+        .pipe(gulp.dest(paths.distTestE2E))
         .pipe(concat("e2e.js"))
         .pipe(sourceMaps.write("./"))
         .pipe(gulp.dest(paths.distTestE2E));
