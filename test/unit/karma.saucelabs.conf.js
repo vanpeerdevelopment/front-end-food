@@ -51,7 +51,7 @@ module.exports = function configure(config) {
         sauceLabs: {
             username: "vanpeerdevelopment",
             accessKey: process.env.SAUCE_ACCESS_KEY,
-            build: `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER} [${process.env.TRAVIS_BUILD_ID}])`,
+            build: `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
             testName: "Front-End-Food Unit Tests",
             tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
         },
