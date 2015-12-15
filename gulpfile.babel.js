@@ -1,4 +1,5 @@
-/* global __dirname */
+/* global __dirname, process */
+/* eslint no-process-env: 0 */
 
 import gulp from "gulp";
 import runSequence from "run-sequence";
@@ -190,10 +191,17 @@ gulp.task("watch:app:test:unit", () => {
     gulp.watch(paths.testUnitJs, ["build:app:test:unit"]);
 });
 
+let karmaConfigFile = () => {
+    if(process.env.CI) {
+        return `${__dirname}/test/unit/karma.saucelabs.conf.js`;
+    }
+    return `${__dirname}/test/unit/karma.conf.js`;
+};
+
 let unitTest = (singleRun, callback) => {
     new karma.Server(
         {
-            configFile: `${__dirname}/test/unit/karma.conf.js`,
+            configFile: karmaConfigFile(),
             singleRun
         },
         callback)
