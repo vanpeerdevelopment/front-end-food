@@ -10,6 +10,7 @@ rm -r ~/Development/front-end-food/front-end-food/dist
 
 # Install
 echo "----- Updating nodejs -----"
+sudo apt-get update
 sudo apt-get install nodejs
 
 echo "----- Installing npm -----"
