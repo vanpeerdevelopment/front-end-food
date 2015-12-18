@@ -1,4 +1,4 @@
-export let disableDebugInfo = $compileProvider => {
+export default $compileProvider => {
     "ngInject";
     $compileProvider.debugInfoEnabled(false);
 };

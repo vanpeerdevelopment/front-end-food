@@ -8,6 +8,7 @@ module.exports = function configure(config) {
             "dist/src/vendor/es6-module-loader.min.js",
             "dist/src/vendor/system.min.js",
             "src/app/**/*.js",
+            "dist/test/unit/util/**/*.js",
             "dist/test/unit/**/*.spec.js",
             "test/unit/karma.bootstrap.js"
         ],
