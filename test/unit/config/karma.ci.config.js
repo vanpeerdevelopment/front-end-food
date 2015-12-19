@@ -43,7 +43,7 @@ var browsers = {
 };
 
 var sauceLabsConfig = {
-    username: "vanpeerdevelopment",
+    username: process.env.SAUCE_USERNAME,
     accessKey: process.env.SAUCE_ACCESS_KEY,
     build: `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
     testName: "Front-End-Food Unit Tests",
