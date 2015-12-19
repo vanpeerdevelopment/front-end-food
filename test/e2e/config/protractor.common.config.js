@@ -31,6 +31,11 @@ module.exports = function ProtractorConfigBuilder() {
         return this;
     };
 
+    this.withMultiCapabilities = function withMultiCapabilities(multiCapabilities) {
+        this.commonConfig.multiCapabilities = multiCapabilities;
+        return this;
+    };
+
     this.withSauceUsername = function withSauceUsername(username) {
         this.commonConfig.sauceUser = username;
         return this;
