@@ -45,6 +45,7 @@ var browsers = {
 var sauceLabsConfig = {
     username: process.env.SAUCE_USERNAME,
     accessKey: process.env.SAUCE_ACCESS_KEY,
+    startConnect: false,
     build: `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
     testName: "Front-End-Food Unit Tests",
     tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
