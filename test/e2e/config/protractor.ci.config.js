@@ -17,6 +17,14 @@ var capabilities = [
     {
         "browserName": "firefox",
         "version": "42",
+        "os": "Linux",
+        "name": "Front-End-Food E2E Tests",
+        "build": `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
+        "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
+    },
+    {
+        "browserName": "firefox",
+        "version": "42",
         "os": "Windows 10",
         "name": "Front-End-Food E2E Tests",
         "build": `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
@@ -31,15 +39,9 @@ var capabilities = [
         "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
     },
     {
-        "browserName": "android",
-        "version": "5.1",
-        "name": "Front-End-Food E2E Tests",
-        "build": `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
-        "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
-    },
-    {
-        "browserName": "android",
-        "version": "4.4",
+        "browserName": "safari",
+        "version": "9",
+        "os": "OS X El Capitan 10.11",
         "name": "Front-End-Food E2E Tests",
         "build": `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
         "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
