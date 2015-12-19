@@ -275,11 +275,18 @@ gulp.task("test:e2e:server:start", callback => {
     );
 });
 
+let protractorConfigFile = () => {
+    if(process.env.CI) {
+        return `${paths.testE2E}config/protractor.ci.config.js`;
+    }
+    return `${paths.testE2E}config/protractor.local.config.js`;
+};
+
 gulp.task("test:e2e:protractor", () => {
     return gulp
         .src(`${paths.testE2E}config/protractor.bootstrap.js`)
         .pipe(protractor({
-            configFile: `${paths.testE2E}config/protractor.local.config.js`
+            configFile: protractorConfigFile()
         }))
         .on("error", err => {
             throw err;

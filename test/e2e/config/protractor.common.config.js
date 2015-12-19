@@ -31,6 +31,16 @@ module.exports = function ProtractorConfigBuilder() {
         return this;
     };
 
+    this.withSauceUsername = function withSauceUsername(username) {
+        this.commonConfig.sauceUser = username;
+        return this;
+    };
+
+    this.withSauceAccessKey = function withSauceAccessKey(accessKey) {
+        this.commonConfig.sauceKey = accessKey;
+        return this;
+    };
+
     this.build = function build() {
         return this.commonConfig;
     };
