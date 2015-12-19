@@ -277,9 +277,9 @@ gulp.task("test:e2e:server:start", callback => {
 
 gulp.task("test:e2e:protractor", () => {
     return gulp
-        .src(`${paths.testE2E}protractor.bootstrap.js`)
+        .src(`${paths.testE2E}config/protractor.bootstrap.js`)
         .pipe(protractor({
-            configFile: `${paths.testE2E}protractor.conf.js`
+            configFile: `${paths.testE2E}config/protractor.config.js`
         }))
         .on("error", err => {
             throw err;

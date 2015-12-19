@@ -9,16 +9,16 @@ exports.config = {
         timeout: 5000
     },
 
-    seleniumServerJar: "../../node_modules/protractor/selenium/selenium-server-standalone-2.48.2.jar",
+    seleniumServerJar: "../../../node_modules/protractor/selenium/selenium-server-standalone-2.48.2.jar",
     capabilities: {
         browserName: "firefox"
     },
 
     beforeLaunch: function beforeLaunch() {
-        require("../../dist/src/vendor/polyfill.min.js");
-        require("../../dist/src/vendor/es6-module-loader.min.js");
-        require("../../dist/src/vendor/system.min.js");
-        require("../../dist/test/e2e/e2e.js");
+        require("../../../dist/src/vendor/polyfill.min.js");
+        require("../../../dist/src/vendor/es6-module-loader.min.js");
+        require("../../../dist/src/vendor/system.min.js");
+        require("../../../dist/test/e2e/e2e.js");
     },
 
     baseUrl: "http://localhost:3000",
