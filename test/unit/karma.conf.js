@@ -10,12 +10,12 @@ module.exports = function configure(config) {
             "dist/src/app/**/*.js",
             "dist/test/unit/util/**/*.js",
             "dist/test/unit/**/*.spec.js",
+            "test/unit/karma.bootstrap.js",
             {
                 pattern: "dist/**/*.js.map",
                 watched: false,
                 included: false
-            },
-            "test/unit/karma.bootstrap.js"
+            }
         ],
         browsers: ["PhantomJS"],
         frameworks: [
