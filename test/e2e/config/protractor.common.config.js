@@ -6,8 +6,8 @@ module.exports = function ProtractorConfigBuilder() {
         framework: "mocha",
         mochaOpts: {
             reporter: "spec",
-            slow: 3000,
-            timeout: 5000
+            slow: 15000,
+            timeout: 30000
         },
 
         beforeLaunch: function beforeLaunch() {
