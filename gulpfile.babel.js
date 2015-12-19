@@ -279,7 +279,7 @@ gulp.task("test:e2e:protractor", () => {
     return gulp
         .src(`${paths.testE2E}config/protractor.bootstrap.js`)
         .pipe(protractor({
-            configFile: `${paths.testE2E}config/protractor.config.js`
+            configFile: `${paths.testE2E}config/protractor.local.config.js`
         }))
         .on("error", err => {
             throw err;
