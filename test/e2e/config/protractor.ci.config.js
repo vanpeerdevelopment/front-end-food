@@ -13,7 +13,8 @@ var capabilities = [
         "name": "Front-End-Food E2E Tests",
         "build": `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
         "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
-    },
+    }
+    /* ,
     {
         "browserName": "firefox",
         "version": "42",
@@ -43,7 +44,7 @@ var capabilities = [
         "name": "Front-End-Food E2E Tests",
         "build": `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
         "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
-    }
+    } */
 ];
 
 exports.config = new ProtractorConfigBuilder()
