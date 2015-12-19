@@ -51,4 +51,5 @@ exports.config = new ProtractorConfigBuilder()
     .withSauceUsername(process.env.SAUCE_USERNAME)
     .withSauceAccessKey(process.env.SAUCE_ACCESS_KEY)
     .withMultiCapabilities(capabilities)
+    .withMaxSessions(5)
     .build();

@@ -46,6 +46,11 @@ module.exports = function ProtractorConfigBuilder() {
         return this;
     };
 
+    this.withMaxSessions = function withMaxSessions(nbSessions) {
+        this.commonConfig.maxSessions = nbSessions;
+        return this;
+    };
+
     this.build = function build() {
         return this.commonConfig;
     };
