@@ -8,7 +8,8 @@ env:
         - secure: "QzjB3P2J8i53VCTbpRU7qUsUrLVxQKbIQvu0QI2d/9LYI+nMtJOX6SvKxdSEOjfp9URMabaM4/dexq/HXQf6kWeSvaNpEe/Oww8tzooBssNiIymIv8/UXm6JUspKxd/pkHhIKMQ9F+k38f9C51oh7LC1FXEbe1tJ0ytNqnW/gmkKi1zM+KSr5ljhQXopxCFpai4v+c+nhmb+Dm5+LOKNkoAd4uGsZaJ8iioIvdXeGJ5z+ALm4HQ3flN2UZ/t1nWrBfoxDwzLD96aA8eGzKtZq7gvVlcTViSz7c7J0Dc/Jw+RgtIUGkzd4YUDHMLoRPEOrROUJUYo8SGi5oJc+3ChJ45fF1UnJLGAwRxlZgnszv7O4N2WuwTtXTIWTSQMlTboduvEx+7p3YW18Is0Ysx5cQzhKoCYJPnHRaZWbP6/xt0K7ZwTTKQBZbUs3Akgb3IyEi7L7LIR019fYSbLNsro1JU/2bzRdjSXZYhqOHY4/CZw3OjRytutEapkpJUrX2/K2NgtK1PbKHVMR81zxHpS41tQEdWm6174RqCN/4T/6/Bvt0vO/6jcLPvaDLQoHEk4RCI7yAlfwgRlUqfMTXPjyrmnLK4Ix+vz3QaWlqsT1oPkHobnNWfrW1A85BykxPun2XUsTMFEOo7uJaqwTdcOrSfuObXnOwy0zPoktySqySU="
 
 addons:
-    firefox: latest
+    - firefox: latest
+    - sauce_connect: true
 before_install:
     - npm install -g npm
     - npm install -g bower
