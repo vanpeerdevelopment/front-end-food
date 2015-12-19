@@ -1,4 +1,4 @@
-/* global module, require */
+/* global module */
 /* eslint global-require: 0 */
 
 module.exports = function ProtractorConfigBuilder() {
@@ -8,13 +8,6 @@ module.exports = function ProtractorConfigBuilder() {
             reporter: "spec",
             slow: 15000,
             timeout: 30000
-        },
-
-        beforeLaunch: function beforeLaunch() {
-            require("../../../dist/src/vendor/polyfill.min.js");
-            require("../../../dist/src/vendor/es6-module-loader.min.js");
-            require("../../../dist/src/vendor/system.min.js");
-            require("../../../dist/test/e2e/e2e.js");
         },
 
         baseUrl: "http://localhost:3000",
