@@ -48,7 +48,7 @@ module.exports = function KarmaConfigBuilder() {
     };
 
     this.withReporter = function withReporter(reporter) {
-        this.commonConfig.reporter.push(reporter);
+        this.commonConfig.reporters.push(reporter);
         return this;
     };
 
