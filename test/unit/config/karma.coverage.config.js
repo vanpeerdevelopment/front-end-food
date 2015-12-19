@@ -2,7 +2,7 @@
 
 module.exports = function configure(config) {
     config.set({
-        basePath: "../..",
+        basePath: "../../..",
         files: [
             "dist/src/vendor/polyfill.min.js",
             "dist/src/vendor/es6-module-loader.min.js",
@@ -10,7 +10,7 @@ module.exports = function configure(config) {
             "src/app/**/*.js",
             "dist/test/unit/util/**/*.js",
             "dist/test/unit/**/*.spec.js",
-            "test/unit/karma.bootstrap.js"
+            "test/unit/config/karma.bootstrap.js"
         ],
         preprocessors: {
             "src/app/**/*.js": ["babel", "coverage"]

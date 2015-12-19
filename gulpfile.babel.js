@@ -193,9 +193,9 @@ gulp.task("watch:app:test:unit", () => {
 
 let karmaConfigFile = () => {
     if(process.env.CI) {
-        return `${__dirname}/test/unit/karma.saucelabs.conf.js`;
+        return `${__dirname}/test/unit/config/karma.saucelabs.config.js`;
     }
-    return `${__dirname}/test/unit/karma.conf.js`;
+    return `${__dirname}/test/unit/config/karma.phantomjs.config.js`;
 };
 
 let unitTest = (singleRun, callback) => {
