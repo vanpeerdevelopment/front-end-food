@@ -1,11 +1,13 @@
-/* global module, process */
+/* global module, require, process */
 /* eslint
     babel/object-shorthand: 0
     no-var: 0,
     no-process-env: 0 */
 
-module.exports = function configure(config) {
-    var customLaunchers = {
+var KarmaConfigBuilder = require("./karma.common.config");
+
+var browsers = {
+    launchers: {
         sauceLabsChrome45Linux: {
             base: "SauceLabs",
             browserName: "chrome",
@@ -34,42 +36,29 @@ module.exports = function configure(config) {
             browserName: "android",
             version: "4.4"
         }
-    };
+    },
+    names: function names() {
+        return Object.keys(this.launchers);
+    }
+};
 
-    config.set({
-        basePath: "../../..",
-        files: [
-            "dist/src/vendor/polyfill.min.js",
-            "dist/src/vendor/es6-module-loader.min.js",
-            "dist/src/vendor/system.min.js",
-            "dist/src/app/**/*.js",
-            "dist/test/unit/util/**/*.js",
-            "dist/test/unit/**/*.spec.js",
-            "test/unit/config/karma.bootstrap.js"
-        ],
-        browsers: Object.keys(customLaunchers),
-        customLaunchers: customLaunchers,
-        sauceLabs: {
-            username: "vanpeerdevelopment",
-            accessKey: process.env.SAUCE_ACCESS_KEY,
-            build: `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
-            testName: "Front-End-Food Unit Tests",
-            tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
-        },
-        frameworks: [
-            "mocha",
-            "chai-sinon"
-        ],
-        reporters: ["mocha", "saucelabs"],
-        plugins: [
-            "karma-sauce-launcher",
-            "karma-mocha",
-            "karma-chai-sinon",
-            "karma-mocha-reporter"
-        ],
-        port: 9876,
-        singleRun: true,
-        concurrency: 5,
-        captureTimeout: 200000
-    });
+var sauceLabsConfig = {
+    username: "vanpeerdevelopment",
+    accessKey: process.env.SAUCE_ACCESS_KEY,
+    build: `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
+    testName: "Front-End-Food Unit Tests",
+    tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
+};
+
+module.exports = function configure(config) {
+    config.set(
+        new KarmaConfigBuilder()
+            .withBrowsers(browsers.names())
+            .withCustomLaunchers(browsers.launchers)
+            .withSauceLabsConfig(sauceLabsConfig)
+            .withReporter("saucelabs")
+            .withPlugin("karma-sauce-launcher")
+            .withConcurrency(5)
+            .withCaptureTimeout(200000)
+            .build());
 };

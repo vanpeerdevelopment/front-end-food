@@ -37,8 +37,38 @@ module.exports = function KarmaConfigBuilder() {
         return this;
     };
 
+    this.withBrowsers = function withBrowser(browsers) {
+        this.commonConfig.browsers = this.commonConfig.browsers.concat(browsers);
+        return this;
+    };
+
+    this.withCustomLaunchers = function withCustomLaunchers(launchers) {
+        this.commonConfig.customLaunchers = launchers;
+        return this;
+    };
+
+    this.withReporter = function withReporter(reporter) {
+        this.commonConfig.reporter.push(reporter);
+        return this;
+    };
+
     this.withPlugin = function withPlugin(plugin) {
         this.commonConfig.plugins.push(plugin);
+        return this;
+    };
+
+    this.withSauceLabsConfig = function withSauceLabsConfig(config) {
+        this.commonConfig.sauceLabs = config;
+        return this;
+    };
+
+    this.withConcurrency = function withConcurrency(concurrency) {
+        this.commonConfig.concurrency = concurrency;
+        return this;
+    };
+
+    this.withCaptureTimeout = function withCaptureTimeout(timeout) {
+        this.commonConfig.captureTimeout = timeout;
         return this;
     };
 
