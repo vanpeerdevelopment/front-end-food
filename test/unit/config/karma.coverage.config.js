@@ -1,4 +1,4 @@
-/* global module*/
+/* global module */
 
 module.exports = function configure(config) {
     config.set({
@@ -32,7 +32,7 @@ module.exports = function configure(config) {
         ],
         reporters: ["mocha", "coverage"],
         coverageReporter: {
-            type: "html",
+            type: "lcovonly",
             dir: "dist/test/unit/coverage",
             subdir: "report",
             includeAllSources: true

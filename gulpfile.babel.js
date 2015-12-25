@@ -18,6 +18,7 @@ import protractorLib from "gulp-protractor";
 import protractorQA from "gulp-protractor-qa";
 import mainBowerFiles from "main-bower-files";
 import browserSync from "browser-sync";
+import coveralls from "gulp-coveralls";
 import ghPages from "gulp-gh-pages";
 
 const protractor = protractorLib.protractor;
@@ -64,6 +65,13 @@ gulp.task("dev", callback => {
     runSequence(
         "build",
         ["watch:app", "watch:vendor", "watch:test:unit", "watch:protractor-qa", "serve"],
+        callback);
+});
+
+gulp.task("coverage", callback => {
+    runSequence(
+        "test:coverage",
+        "coveralls",
         callback);
 });
 
@@ -214,6 +222,22 @@ gulp.task("test:unit", callback => {
 
 gulp.task("watch:test:unit", callback => {
     unitTest(false, callback);
+});
+
+gulp.task("test:coverage", callback => {
+    new karma.Server(
+        {
+            configFile: `${__dirname}/test/unit/config/karma.coverage.config.js`,
+            singleRun: true
+        },
+        callback)
+    .start();
+});
+
+gulp.task("coveralls", () => {
+    return gulp
+        .src("dist/test/unit/coverage/report/lcov.info")
+        .pipe(coveralls());
 });
 
 /*
