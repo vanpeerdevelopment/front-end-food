@@ -13,7 +13,8 @@ module.exports = function configure(config) {
             "test/unit/config/karma.bootstrap.js"
         ],
         preprocessors: {
-            "src/app/**/*.js": ["babel", "coverage"]
+            "src/app/**/*.module.js": ["babel"],
+            "src/app/**/!(*.module).js": ["babel", "coverage"]
         },
         babelPreprocessor: {
             options: {
