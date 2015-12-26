@@ -11,7 +11,6 @@ import concat from "gulp-concat";
 import ngAnnotate from "gulp-ng-annotate";
 import uglify from "gulp-uglify";
 import rename from "gulp-rename";
-import extReplace from "gulp-ext-replace";
 import eslint from "gulp-eslint";
 import karma from "karma";
 import protractorLib from "gulp-protractor";
@@ -324,6 +323,12 @@ gulp.task("test:e2e:server:stop", () => {
 /*
  * vendor:js:bower
  */
+let srcJsToJs = path => {
+    if(path.basename.endsWith(".src")) {
+        path.basename = path.basename.substring(0, path.basename.lastIndexOf(".src"));
+    }
+};
+
 gulp.task("build:vendor:js:bower", () => {
     return gulp
         .src(mainBowerFiles({
@@ -331,7 +336,7 @@ gulp.task("build:vendor:js:bower", () => {
             filter: "**/*.js"
         }))
         .pipe(plumber())
-        .pipe(extReplace(".js", ".src.js"))
+        .pipe(rename(srcJsToJs))
         .pipe(sourceMaps.init())
         .pipe(uglify())
         .pipe(rename({
