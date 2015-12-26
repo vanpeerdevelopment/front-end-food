@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "unused-ignores": [
+      "angular-new-router",
+      "babel-polyfill"
+    ]
+  }
+}
