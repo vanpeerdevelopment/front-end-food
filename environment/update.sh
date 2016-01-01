@@ -1,4 +1,8 @@
 # Uninstall
+echo "----- Clear npm cache -----"
+npm cache clean
+echo "----- Clear bower cache -----"
+bower cache clean
 echo "----- Removing ~/.npm_global -----"
 rm -r ~/.npm_global
 echo "----- Removing node_modules -----"
