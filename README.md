@@ -11,7 +11,7 @@ More information about the tools and technologies that are used can be found on 
 4. [Install](https://github.com/vanpeerdevelopment/front-end-food/wiki/Bower#installation) bower
 5. [Install](https://github.com/vanpeerdevelopment/front-end-food/wiki/gulp#installation) gulp
 
-## First build
+## Build
 1. `git clone git@github.com:vanpeerdevelopment/front-end-food.git`
 2. `npm install`
 3. `bower install`
