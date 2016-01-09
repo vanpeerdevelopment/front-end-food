@@ -3,6 +3,6 @@ export default class HomeController {
     constructor() {}
 
     activate() {
-        this.title = "Front End Food";
+        this.minNbOfRecipes = 10;
     }
 }

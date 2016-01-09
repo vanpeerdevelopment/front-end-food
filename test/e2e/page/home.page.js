@@ -11,13 +11,9 @@ export default class HomePage {
         return this;
     }
 
-    assertPageTitle() {
-        expect(element(by.binding("home.title")).getText()).to.eventually.equal("Front End Food");
-        return this;
-    }
-
-    assertSum() {
-        expect(element(by.tagName("p")).getText()).to.eventually.equal("Angular is working: 1 + 1 = 2");
+    assertNumberOfRecipes() {
+        expect(element(by.id("number-recipes")).getText())
+            .to.eventually.equal("Op deze pagina zullen binnenkort minstens 10 recepten staan.");
         return this;
     }
 

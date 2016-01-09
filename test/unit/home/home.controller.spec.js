@@ -6,10 +6,10 @@ describe("HomeController", () => {
     beforeEach(() => homeController = new HomeController());
 
     describe("#activate()", () =>
-        it("should initialize title", () => {
+        it("should initialize minimum number of recipes", () => {
             homeController.activate();
 
-            homeController.title.should.equal("Front End Food");
+            homeController.minNbOfRecipes.should.equal(10);
         })
     );
 });
