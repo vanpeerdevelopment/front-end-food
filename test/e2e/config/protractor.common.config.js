@@ -11,9 +11,9 @@ module.exports = function ProtractorConfigBuilder() {
         },
 
         onPrepare: function onPrepare() {
-            require("../../../dist/src/vendor/polyfill.min.js");
-            require("../../../dist/src/vendor/es6-module-loader.min.js");
-            require("../../../dist/src/vendor/system.min.js");
+            require("../../../dist/src/vendor/js/polyfill.min.js");
+            require("../../../dist/src/vendor/js/es6-module-loader.min.js");
+            require("../../../dist/src/vendor/js/system.min.js");
             require("../../../dist/test/e2e/e2e.js");
         },
 

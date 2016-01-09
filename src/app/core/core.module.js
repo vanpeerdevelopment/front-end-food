@@ -4,7 +4,8 @@ export default angular
     .module("app.core", [
 
         /* angular modules */
-        "ngNewRouter"
+        "ngNewRouter",
+        "ngMaterial"
 
         /* 3rd-party modules */
 

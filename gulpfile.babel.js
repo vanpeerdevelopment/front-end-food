@@ -10,6 +10,7 @@ import babel from "gulp-babel";
 import concat from "gulp-concat";
 import ngAnnotate from "gulp-ng-annotate";
 import uglify from "gulp-uglify";
+import cssnano from "gulp-cssnano";
 import rename from "gulp-rename";
 import eslint from "gulp-eslint";
 import karma from "karma";
@@ -39,7 +40,8 @@ let paths = {
     dist: "dist/",
     distSrc: "dist/src/",
     distSrcApp: "dist/src/app/",
-    distSrcVendor: "dist/src/vendor/",
+    distSrcVendorJs: "dist/src/vendor/js/",
+    distSrcVendorCss: "dist/src/vendor/css/",
     distTestUnit: "dist/test/unit/",
     distTestE2E: "dist/test/e2e/",
     deploy: "dist/src/**/*"
@@ -90,10 +92,12 @@ gulp.task("watch:app:src", ["watch:app:src:js", "watch:app:src:html", "watch:app
 gulp.task("build:app:test", ["build:app:test:unit", "build:app:test:e2e"]);
 gulp.task("watch:app:test", ["watch:app:test:unit", "watch:app:test:e2e"]);
 
-gulp.task("build:vendor", ["build:vendor:js"]);
-gulp.task("watch:vendor", ["watch:vendor:js"]);
+gulp.task("build:vendor", ["build:vendor:js", "build:vendor:css"]);
+gulp.task("watch:vendor", ["watch:vendor:js", "watch:vendor:css"]);
 gulp.task("build:vendor:js", ["build:vendor:js:bower", "build:vendor:js:npm"]);
 gulp.task("watch:vendor:js", ["watch:vendor:js:bower", "watch:vendor:js:npm"]);
+gulp.task("build:vendor:css", ["build:vendor:css:bower"]);
+gulp.task("watch:vendor:css", ["watch:vendor:css:bower"]);
 
 /*
  * general
@@ -343,7 +347,7 @@ gulp.task("build:vendor:js:bower", () => {
             suffix: ".min"
         }))
         .pipe(sourceMaps.write("./"))
-        .pipe(gulp.dest(paths.distSrcVendor));
+        .pipe(gulp.dest(paths.distSrcVendorJs));
 });
 
 gulp.task("watch:vendor:js:bower", () => {
@@ -366,9 +370,32 @@ gulp.task("build:vendor:js:npm", () => {
             suffix: ".min"
         }))
         .pipe(sourceMaps.write("./"))
-        .pipe(gulp.dest(paths.distSrcVendor));
+        .pipe(gulp.dest(paths.distSrcVendorJs));
 });
 
 gulp.task("watch:vendor:js:npm", () => {
     gulp.watch(paths.npm, ["build:vendor:js:npm"]);
+});
+
+/*
+ * vendor:css:bower
+ */
+gulp.task("build:vendor:css:bower", () => {
+    return gulp
+        .src(mainBowerFiles({
+            checkExistence: true,
+            filter: "**/*.css"
+        }))
+        .pipe(plumber())
+        .pipe(sourceMaps.init())
+        .pipe(cssnano())
+        .pipe(rename({
+            suffix: ".min"
+        }))
+        .pipe(sourceMaps.write("./"))
+        .pipe(gulp.dest(paths.distSrcVendorCss));
+});
+
+gulp.task("watch:vendor:css:bower", () => {
+    gulp.watch(paths.bower, ["build:vendor:css:bower"]);
 });
