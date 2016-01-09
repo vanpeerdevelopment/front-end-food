@@ -40,8 +40,8 @@ var capabilities = [
     },
     {
         "browserName": "chrome",
-        "version": "46",
-        "os": "OS X El Capitan 10.11",
+        "version": "47",
+        "os": "Mac 10.11",
         "name": "Front-End-Food E2E Tests",
         "build": `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
         "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER

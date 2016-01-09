@@ -32,6 +32,7 @@ let paths = {
     cname: "src/CNAME",
     srcAppJs: "src/app/**/*.js",
     srcAppHtml: "src/app/**/*.html",
+    srcAssetsCss: "src/assets/**/*.css",
     testJs: "test/**/*.js",
     testUnitJs: "test/unit/**/*.js",
     testE2EJs: "test/e2e/**/*.js",
@@ -87,8 +88,8 @@ gulp.task("deploy", () => {
  */
 gulp.task("build:app", ["build:app:src", "build:app:test"]);
 gulp.task("watch:app", ["watch:app:src", "watch:app:test"]);
-gulp.task("build:app:src", ["build:app:src:js", "build:app:src:html", "build:app:src:cname"]);
-gulp.task("watch:app:src", ["watch:app:src:js", "watch:app:src:html", "watch:app:src:cname"]);
+gulp.task("build:app:src", ["build:app:src:js", "build:app:src:html", "build:app:src:css", "build:app:src:cname"]);
+gulp.task("watch:app:src", ["watch:app:src:js", "watch:app:src:html", "watch:app:src:css", "watch:app:src:cname"]);
 gulp.task("build:app:test", ["build:app:test:unit", "build:app:test:e2e"]);
 gulp.task("watch:app:test", ["watch:app:test:unit", "watch:app:test:e2e"]);
 
@@ -166,6 +167,27 @@ gulp.task("build:app:src:html", () => {
 
 gulp.task("watch:app:src:html", () => {
     gulp.watch([paths.indexHtml, paths.srcAppHtml], ["build:app:src:html"]);
+});
+
+/*
+ * app:src:css
+ */
+gulp.task("build:app:src:css", () => {
+    return gulp
+        .src(paths.srcAssetsCss)
+        .pipe(plumber())
+        .pipe(sourceMaps.init())
+        .pipe(concat("app.css"))
+        .pipe(cssnano())
+        .pipe(rename({
+            suffix: ".min"
+        }))
+        .pipe(sourceMaps.write("./"))
+        .pipe(gulp.dest(paths.distSrcApp));
+});
+
+gulp.task("watch:app:src:css", () => {
+    gulp.watch(paths.srcAssetsCss, ["build:app:src:css"]);
 });
 
 /*
