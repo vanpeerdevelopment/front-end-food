@@ -1,7 +1,7 @@
-/* global __dirname, process */
-/* eslint no-process-env: 0 */
+/* global __dirname */
 
 import gulp from "gulp";
+import gutil from "gulp-util";
 import runSequence from "run-sequence";
 import del from "del";
 import plumber from "gulp-plumber";
@@ -199,7 +199,7 @@ gulp.task("watch:app:test:unit", () => {
 });
 
 let karmaConfigFile = () => {
-    if(process.env.CI) {
+    if(gutil.env.CI) {
         return `${__dirname}/test/unit/config/karma.ci.config.js`;
     }
     return `${__dirname}/test/unit/config/karma.local.config.js`;
@@ -299,7 +299,7 @@ gulp.task("test:e2e:server:start", callback => {
 });
 
 let protractorConfigFile = () => {
-    if(process.env.CI) {
+    if(gutil.env.CI) {
         return `${paths.testE2E}config/protractor.ci.config.js`;
     }
     return `${paths.testE2E}config/protractor.local.config.js`;
