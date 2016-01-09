@@ -19,7 +19,7 @@ install:
 
 before_script:
     - npm install -g gulp
-script: gulp
+script: gulp --ci
 
 after_success:
     - git config --global user.name "travisvanpeerdevelopment"

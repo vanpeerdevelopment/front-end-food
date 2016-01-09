@@ -199,7 +199,7 @@ gulp.task("watch:app:test:unit", () => {
 });
 
 let karmaConfigFile = () => {
-    if(gutil.env.CI) {
+    if(gutil.env.ci) {
         return `${__dirname}/test/unit/config/karma.ci.config.js`;
     }
     return `${__dirname}/test/unit/config/karma.local.config.js`;
@@ -299,7 +299,7 @@ gulp.task("test:e2e:server:start", callback => {
 });
 
 let protractorConfigFile = () => {
-    if(gutil.env.CI) {
+    if(gutil.env.ci) {
         return `${paths.testE2E}config/protractor.ci.config.js`;
     }
     return `${paths.testE2E}config/protractor.local.config.js`;
