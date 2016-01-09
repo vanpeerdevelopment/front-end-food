@@ -4,7 +4,6 @@ export default class HomePage {
 
     constructor() {
         browser.get("");
-        browser.wait(() => element(by.id("number-recipes")).isPresent(), 1000);
     }
 
     assertBrowserTitle() {

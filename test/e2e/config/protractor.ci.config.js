@@ -39,8 +39,8 @@ var capabilities = [
         "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER
     },
     {
-        "browserName": "safari",
-        "version": "9",
+        "browserName": "chrome",
+        "version": "47",
         "os": "OS X El Capitan 10.11",
         "name": "Front-End-Food E2E Tests",
         "build": `Front-End-Food (Travis #${process.env.TRAVIS_BUILD_NUMBER})`,
