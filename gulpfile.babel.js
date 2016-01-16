@@ -32,7 +32,7 @@ let paths = {
     cname: "src/CNAME",
     srcAppJs: "src/app/**/*.js",
     srcAppHtml: "src/app/**/*.html",
-    srcAssetsCss: "src/assets/**/*.css",
+    srcContentCss: "src/content/css/*.css",
     testJs: "test/**/*.js",
     testUnitJs: "test/unit/**/*.js",
     testE2EJs: "test/e2e/**/*.js",
@@ -41,6 +41,7 @@ let paths = {
     dist: "dist/",
     distSrc: "dist/src/",
     distSrcApp: "dist/src/app/",
+    distSrcContentCss: "dist/src/content/css/",
     distSrcVendorJs: "dist/src/vendor/js/",
     distSrcVendorCss: "dist/src/vendor/css/",
     distTestUnit: "dist/test/unit/",
@@ -174,7 +175,7 @@ gulp.task("watch:app:src:html", () => {
  */
 gulp.task("build:app:src:css", () => {
     return gulp
-        .src(paths.srcAssetsCss)
+        .src(paths.srcContentCss)
         .pipe(plumber())
         .pipe(sourceMaps.init())
         .pipe(concat("app.css"))
@@ -183,11 +184,11 @@ gulp.task("build:app:src:css", () => {
             suffix: ".min"
         }))
         .pipe(sourceMaps.write("./"))
-        .pipe(gulp.dest(paths.distSrcApp));
+        .pipe(gulp.dest(paths.distSrcContentCss));
 });
 
 gulp.task("watch:app:src:css", () => {
-    gulp.watch(paths.srcAssetsCss, ["build:app:src:css"]);
+    gulp.watch(paths.srcContentCss, ["build:app:src:css"]);
 });
 
 /*
