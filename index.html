@@ -11,16 +11,7 @@
 </head>
 
 <body ng-cloak>
-    <div layout="column" layout-fill>
-        <md-toolbar md-scroll-shrink="false">
-            <div class="md-toolbar-tools">
-                <span>Front end food</span>
-            </div>
-        </md-toolbar>
-        <md-content layout-padding>
-            <div ng-viewport></div>
-        </md-content>
-    </div>
+    <div ng-include="'app/layout/layout.shell.html'"></div>
     <!-- vendor -->
     <script type="text/javascript" src="vendor/js/angular.min.js"></script>
     <script type="text/javascript" src="vendor/js/angular-animate.min.js"></script>
