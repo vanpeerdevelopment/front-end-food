@@ -1,9 +1,9 @@
 import ngDeannotate from "util/testutil";
-import templateMappingConfigAnnotated from "core/core.config";
+import routerConfigAnnotated from "core/core.router.config";
 
-describe("templateMappingConfig", () => {
+describe("routerConfig", () => {
     let componentLoaderProvider;
-    let templateMappingConfig;
+    let routerConfig;
 
     beforeEach(() => {
         componentLoaderProvider = {
@@ -12,7 +12,7 @@ describe("templateMappingConfig", () => {
                 this.mapping = mapping;
             }
         };
-        templateMappingConfig = ngDeannotate(templateMappingConfigAnnotated);
+        routerConfig = ngDeannotate(routerConfigAnnotated);
     });
 
     it("should set template mapping", () => {
@@ -20,13 +20,13 @@ describe("templateMappingConfig", () => {
             .mock(componentLoaderProvider)
             .expects("setTemplateMapping").once();
 
-        templateMappingConfig(componentLoaderProvider);
+        routerConfig(componentLoaderProvider);
 
         componentLoaderProviderMock.verify();
     });
 
     it("should map templates to app directory", () => {
-        templateMappingConfig(componentLoaderProvider);
+        routerConfig(componentLoaderProvider);
 
         let mapped = componentLoaderProvider.mapping("home");
 
@@ -34,7 +34,7 @@ describe("templateMappingConfig", () => {
     });
 
     it("should map camel casing to dash casing", () => {
-        templateMappingConfig(componentLoaderProvider);
+        routerConfig(componentLoaderProvider);
 
         let mapped = componentLoaderProvider.mapping("frontEndFood");
 

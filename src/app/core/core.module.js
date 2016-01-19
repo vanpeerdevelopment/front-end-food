@@ -1,4 +1,5 @@
-import templateMappingConfig from "core/core.config";
+import routerConfig from "core/core.router.config";
+import materialConfig from "core/core.material.config";
 
 export default angular
     .module("app.core", [
@@ -11,4 +12,5 @@ export default angular
 
         /* cross-app modules */
     ])
-    .config(templateMappingConfig);
+    .config(routerConfig)
+    .config(materialConfig);
