@@ -16,7 +16,7 @@
         "angular": "~1.4.8",
         "angular-animate": "~1.4.8",
         "angular-aria": "~1.4.8",
-        "angular-material": "~1.0.1",
+        "angular-material": "~1.0.2",
         "es6-module-loader": "~0.17.8",
         "system.js": "~0.19.6"
     },
