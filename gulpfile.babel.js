@@ -33,6 +33,7 @@ let paths = {
     srcAppJs: "src/app/**/*.js",
     srcAppHtml: "src/app/**/*.html",
     srcContentCss: "src/content/css/*.css",
+    srcContentImg: "src/content/images/*",
     testJs: "test/**/*.js",
     testUnitJs: "test/unit/**/*.js",
     testE2EJs: "test/e2e/**/*.js",
@@ -42,6 +43,7 @@ let paths = {
     distSrc: "dist/src/",
     distSrcApp: "dist/src/app/",
     distSrcContentCss: "dist/src/content/css/",
+    distSrcContentImg: "dist/src/content/images/",
     distSrcVendorJs: "dist/src/vendor/js/",
     distSrcVendorCss: "dist/src/vendor/css/",
     distTestUnit: "dist/test/unit/",
@@ -89,8 +91,8 @@ gulp.task("deploy", () => {
  */
 gulp.task("build:app", ["build:app:src", "build:app:test"]);
 gulp.task("watch:app", ["watch:app:src", "watch:app:test"]);
-gulp.task("build:app:src", ["build:app:src:js", "build:app:src:html", "build:app:src:css", "build:app:src:cname"]);
-gulp.task("watch:app:src", ["watch:app:src:js", "watch:app:src:html", "watch:app:src:css", "watch:app:src:cname"]);
+gulp.task("build:app:src", ["build:app:src:js", "build:app:src:html", "build:app:src:css", "build:app:src:img", "build:app:src:cname"]);
+gulp.task("watch:app:src", ["watch:app:src:js", "watch:app:src:html", "watch:app:src:css", "watch:app:src:img", "watch:app:src:cname"]);
 gulp.task("build:app:test", ["build:app:test:unit", "build:app:test:e2e"]);
 gulp.task("watch:app:test", ["watch:app:test:unit", "watch:app:test:e2e"]);
 
@@ -189,6 +191,19 @@ gulp.task("build:app:src:css", () => {
 
 gulp.task("watch:app:src:css", () => {
     gulp.watch(paths.srcContentCss, ["build:app:src:css"]);
+});
+
+/*
+ * app:src:img
+ */
+gulp.task("build:app:src:img", () => {
+    return gulp
+        .src(paths.srcContentImg)
+        .pipe(gulp.dest(paths.distSrcContentImg));
+});
+
+gulp.task("watch:app:src:img", () => {
+    gulp.watch(paths.srcContentImg, ["build:app:src:img"]);
 });
 
 /*
