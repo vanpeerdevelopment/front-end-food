@@ -7,7 +7,7 @@ export default class HomePage {
     }
 
     assertBrowserTitle() {
-        expect(browser.getTitle()).to.eventually.equal("Front End Food");
+        expect(browser.getTitle()).to.eventually.equal("Front end food");
         return this;
     }
 
