@@ -121,7 +121,7 @@
         "no-restricted-modules": 0,
         "no-sync": 2,
 
-        "array-bracket-spacing": [2, "never"],
+        "array-bracket-spacing": [0, "never"],
         "block-spacing": [2, "always"],
         "brace-style": [2, "1tbs", { "allowSingleLine": false }],
         "camelcase": [2, {"properties": "always"}],
@@ -258,6 +258,7 @@
 
         "babel/generator-star-spacing": [2, "after"],
         "babel/new-cap": 2,
+        "babel/array-bracket-spacing": [2, "never"],
         "babel/object-curly-spacing": [2, "never"],
         "babel/object-shorthand": [2, "always"],
         "babel/arrow-parens": [2, "as-needed"],
