@@ -27,6 +27,11 @@ module.exports = function ProtractorConfigBuilder() {
         return this;
     };
 
+    this.withChromeDriver = function withChromeDriver(location) {
+        this.commonConfig.chromeDriver = location;
+        return this;
+    };
+
     this.withCapabilities = function withCapabilities(capabilities) {
         this.commonConfig.capabilities = capabilities;
         return this;
