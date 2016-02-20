@@ -3,6 +3,7 @@ import WidgetsModule from "widgets/widgets.module";
 import LayoutModule from "layout/layout.module";
 import HomeModule from "home/home.module";
 import disableDebugInfo from "app.config";
+import loadTemplates from "app.templates";
 import RouteController from "app.route";
 
 export default angular
@@ -17,4 +18,5 @@ export default angular
         HomeModule.name
     ])
     .config(disableDebugInfo)
+    .run(loadTemplates)
     .controller("RouteController", RouteController);

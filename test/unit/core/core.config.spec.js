@@ -30,7 +30,7 @@ describe("routerConfig", () => {
 
         let mapped = componentLoaderProvider.mapping("home");
 
-        mapped.should.equal("./app/home/home.html");
+        mapped.should.equal("app/home/home.html");
     });
 
     it("should map camel casing to dash casing", () => {
@@ -38,6 +38,6 @@ describe("routerConfig", () => {
 
         let mapped = componentLoaderProvider.mapping("frontEndFood");
 
-        mapped.should.equal("./app/front-end-food/front-end-food.html");
+        mapped.should.equal("app/front-end-food/front-end-food.html");
     });
 });

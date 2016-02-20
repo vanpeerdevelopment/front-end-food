@@ -5,6 +5,9 @@ import gutil from "gulp-util";
 import runSequence from "run-sequence";
 import del from "del";
 import plumber from "gulp-plumber";
+import htmlmin from "gulp-htmlmin";
+import templateCache from "gulp-angular-templatecache";
+import addStream from "add-stream";
 import sourceMaps from "gulp-sourcemaps";
 import babel from "gulp-babel";
 import concat from "gulp-concat";
@@ -68,7 +71,8 @@ gulp.task("build", callback => {
 
 gulp.task("dev", callback => {
     runSequence(
-        "build",
+        "clean",
+        ["build:app", "build:vendor"],
         ["watch:app", "watch:vendor", "watch:test:unit", "watch:protractor-qa", "serve"],
         callback);
 });
@@ -91,8 +95,8 @@ gulp.task("deploy", () => {
  */
 gulp.task("build:app", ["build:app:src", "build:app:test"]);
 gulp.task("watch:app", ["watch:app:src", "watch:app:test"]);
-gulp.task("build:app:src", ["build:app:src:js", "build:app:src:html", "build:app:src:css", "build:app:src:img", "build:app:src:cname"]);
-gulp.task("watch:app:src", ["watch:app:src:js", "watch:app:src:html", "watch:app:src:css", "watch:app:src:img", "watch:app:src:cname"]);
+gulp.task("build:app:src", ["build:app:src:js", "build:app:src:index", "build:app:src:css", "build:app:src:img", "build:app:src:cname"]);
+gulp.task("watch:app:src", ["watch:app:src:js", "watch:app:src:index", "watch:app:src:css", "watch:app:src:img", "watch:app:src:cname"]);
 gulp.task("build:app:test", ["build:app:test:unit", "build:app:test:e2e"]);
 gulp.task("watch:app:test", ["watch:app:test:unit", "watch:app:test:e2e"]);
 
@@ -133,9 +137,33 @@ gulp.task("serve", callback => {
 /*
  * app:src:js
  */
+let templates = () => {
+    return gulp
+        .src(paths.srcAppHtml, {base: "src"})
+        .pipe(htmlmin({
+            removeComments: true,
+            collapseWhitespace: true,
+            conservativeCollapse: true,
+            preserveLineBreaks: true,
+            collapseBooleanAttributes: true,
+            removeEmptyAttributes: true,
+            removeTagWhitespace: true,
+            keepClosingSlash: true,
+            quoteCharacter: "\""
+        }))
+        .pipe(templateCache("app.templates.js", {
+            templateHeader: "export default $templateCache => {\n\"ngInject\";\n",
+            templateFooter: "\n};",
+            transformUrl(url) {
+                return url.substring(url.indexOf("app/"));
+            }
+        }));
+};
+
 gulp.task("build:app:src:js", () => {
     return gulp
         .src(paths.srcAppJs)
+        .pipe(addStream.obj(templates()))
         .pipe(plumber())
         .pipe(sourceMaps.init())
         .pipe(babel({
@@ -154,22 +182,20 @@ gulp.task("build:app:src:js", () => {
 });
 
 gulp.task("watch:app:src:js", () => {
-    gulp.watch(paths.srcAppJs, ["build:app:src:js"]);
+    gulp.watch([paths.srcAppJs, paths.srcAppHtml], ["build:app:src:js"]);
 });
 
 /*
- * app:src:html
+ * app:src:index
  */
-gulp.task("build:app:src:html", () => {
+gulp.task("build:app:src:index", () => {
     return gulp
-        .src([paths.indexHtml, paths.srcAppHtml], {
-            base: "src"
-        })
+        .src(paths.indexHtml)
         .pipe(gulp.dest(paths.distSrc));
 });
 
-gulp.task("watch:app:src:html", () => {
-    gulp.watch([paths.indexHtml, paths.srcAppHtml], ["build:app:src:html"]);
+gulp.task("watch:app:src:index", () => {
+    gulp.watch(paths.indexHtml, ["build:app:src:index"]);
 });
 
 /*

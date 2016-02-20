@@ -8,5 +8,5 @@ let camelToDash = name => {
 export default $componentLoaderProvider => {
     "ngInject";
     $componentLoaderProvider
-        .setTemplateMapping(name => `./app/${camelToDash(name)}/${camelToDash(name)}.html`);
+        .setTemplateMapping(name => `app/${camelToDash(name)}/${camelToDash(name)}.html`);
 };
