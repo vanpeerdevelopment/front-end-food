@@ -274,12 +274,11 @@ let karmaConfigFile = () => {
 };
 
 let unitTest = (singleRun, callback) => {
-    new karma.Server(
-        {
-            configFile: karmaConfigFile(),
-            singleRun
-        },
-        callback)
+    new karma.Server({
+        configFile: karmaConfigFile(),
+        singleRun
+    },
+    callback)
     .start();
 };
 
